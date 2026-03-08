@@ -25,6 +25,10 @@ api = load_ai_system()
 # ---------------------------------------------------------
 # SIDEBAR NAVIGATION
 # ---------------------------------------------------------
+# Initialize session state for navigation
+if 'nav_page' not in st.session_state:
+    st.session_state.nav_page = "System Setup & Training"
+
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Select Module", 
@@ -34,7 +38,8 @@ page = st.sidebar.radio(
         "Debtor Analysis Profiler", 
         "Batch Priority Analysis", 
         "Compliance Checker"
-    ]
+    ],
+    key="nav_page"
 )
 
 st.sidebar.divider()
@@ -75,6 +80,7 @@ if page == "System Setup & Training":
                 try:
                     api.setup(n_training_debtors=n_debtors, n_training_comms=n_comms)
                     st.success("System Successfully Trained and Initialized!")
+                    st.session_state.nav_page = "Dashboard Overview"
                     st.rerun()
                 except Exception as e:
                     st.error(f"An error occurred during training: {str(e)}")
@@ -122,6 +128,7 @@ if page == "System Setup & Training":
                         api.orchestrator.data_generator.generate_communication_data = orig_gen_comms
                         
                         st.success("Successfully trained models on your custom data!")
+                        st.session_state.nav_page = "Dashboard Overview"
                         st.rerun()
                         
                     except Exception as e:
