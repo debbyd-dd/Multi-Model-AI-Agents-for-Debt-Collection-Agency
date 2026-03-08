@@ -193,7 +193,7 @@ elif page == "Batch Priority Analysis":
 # ---------------------------------------------------------
 # PAGE 4: COMPLIANCE CHECKER
 # ---------------------------------------------------------
-elif page == "Compliance Monitoring Agent":
+elif page == "Compliance Checker":
     st.title("⚖️ FDCPA / TCPA Compliance Sandbox")
     st.write("Manually test an intended collection action against the rules engine.")
     
