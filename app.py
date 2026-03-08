@@ -23,46 +23,117 @@ def load_ai_system():
 api = load_ai_system()
 
 # ---------------------------------------------------------
-# SYSTEM INITIALIZATION BARRIER
-# ---------------------------------------------------------
-if not api.initialized:
-    st.title("🤖 Multi-Model AI Agents for Debt Collection")
-    st.info("The AI system is offline. The Multi-Agent models (Risk, NLP, Payment Prediction, RL Strategy) need to be trained on synthetic data before starting.")
-    
-    # We reduce the default training size slightly so it doesn't timeout on Streamlit Cloud
-    n_debtors = st.slider("Training Dataset Size (Debtors)", 100, 2000, 500, step=100)
-    n_comms = st.slider("Training Dataset Size (Communications)", 500, 5000, 1000, step=100)
-    
-    if st.button("Initialize & Train System", type="primary", use_container_width=True):
-        with st.spinner("Training Neural Networks, Ensembles, and RL Agents... This may take 1-2 minutes."):
-            try:
-                api.setup(n_training_debtors=n_debtors, n_training_comms=n_comms)
-                st.success("System Successfully Trained and Initialized!")
-                st.rerun()
-            except Exception as e:
-                st.error(f"An error occurred during training: {str(e)}")
-    st.stop() # Halt rendering the rest of the app until initialized
-
-# ---------------------------------------------------------
 # SIDEBAR NAVIGATION
 # ---------------------------------------------------------
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Select Module", 
-    ["Dashboard Overview", "Debtor Analysis Profiler", "Batch Priority Analysis", "Compliance Checker"]
+    [
+        "System Setup & Training", 
+        "Dashboard Overview", 
+        "Debtor Analysis Profiler", 
+        "Batch Priority Analysis", 
+        "Compliance Checker"
+    ]
 )
 
 st.sidebar.divider()
 st.sidebar.subheader("System Status")
 status = api.get_status()
-st.sidebar.caption(f"✅ System Initialized")
-st.sidebar.caption(f"👥 Debtors in Database: {status['data_stats']['debtors_loaded']}")
-st.sidebar.caption(f"💬 Comms in Database: {status['data_stats']['communications_loaded']}")
+
+if status['system_initialized']:
+    st.sidebar.caption("✅ System Initialized")
+    st.sidebar.caption(f"👥 Debtors in Database: {status['data_stats'].get('debtors_loaded', 0)}")
+    st.sidebar.caption(f"💬 Comms in Database: {status['data_stats'].get('communications_loaded', 0)}")
+else:
+    st.sidebar.caption("❌ System Offline (Needs Training)")
+
+# Ensure system is initialized before accessing other modules
+if not api.initialized and page != "System Setup & Training":
+    st.warning("⚠️ The AI system is currently offline. Please go to the **System Setup & Training** module to train the models before proceeding.")
+    st.stop()
+
+# ---------------------------------------------------------
+# PAGE 0: SYSTEM SETUP & TRAINING
+# ---------------------------------------------------------
+if page == "System Setup & Training":
+    st.title("⚙️ System Setup & Data Training")
+    st.info("Train the Multi-Agent models (Risk, NLP, Payment Prediction, RL Strategy) before analyzing debtors. You can retrain the system at any time.")
+    
+    tab1, tab2 = st.tabs(["🧬 Train with Synthetic Data", "📁 Upload Custom Data (CSV/Excel)"])
+    
+    # --- TAB 1: SYNTHETIC DATA ---
+    with tab1:
+        st.subheader("Generate Synthetic Training Data")
+        st.write("Use the built-in data generator to simulate realistic debtor profiles and communications to train the AI.")
+        
+        n_debtors = st.slider("Training Dataset Size (Debtors)", 100, 2000, 500, step=100)
+        n_comms = st.slider("Training Dataset Size (Communications)", 500, 5000, 1000, step=100)
+        
+        if st.button("Initialize & Train Synthetic Data", type="primary", use_container_width=True):
+            with st.spinner("Training Neural Networks, Ensembles, and RL Agents... This may take 1-2 minutes."):
+                try:
+                    api.setup(n_training_debtors=n_debtors, n_training_comms=n_comms)
+                    st.success("System Successfully Trained and Initialized!")
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"An error occurred during training: {str(e)}")
+                    
+    # --- TAB 2: CUSTOM DATA UPLOAD ---
+    with tab2:
+        st.subheader("Train AI with Agency Data")
+        
+        st.markdown("""
+        **📋 Data Requirements Note:**
+        To train the AI on your own data, ensure your files contain these key columns:
+        * **Debtors File:** `debtor_id` (Debt No), `first_name` (Name), `last_name`, `total_debt`, `remaining_balance`, `days_past_due`, `credit_score`, `income_estimate`, `response_rate`, `status`, `will_pay_30_days` (Target 0 or 1).
+        * **Communications File:** `comm_id`, `debtor_id` (matching Debt No), `text` (Message transcript), `intent` (e.g. reluctant, willing_to_pay), `sentiment`.
+        """)
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            debtor_file = st.file_uploader("Upload Debtors Data", type=['csv', 'xlsx'])
+        with c2:
+            comm_file = st.file_uploader("Upload Communications Data", type=['csv', 'xlsx'])
+            
+        if st.button("Train with Uploaded Data", type="primary", use_container_width=True):
+            if debtor_file and comm_file:
+                with st.spinner("Processing custom files and training AI Agents..."):
+                    try:
+                        # Load files into DataFrames
+                        load_func_debtor = pd.read_csv if debtor_file.name.endswith('.csv') else pd.read_excel
+                        load_func_comm = pd.read_csv if comm_file.name.endswith('.csv') else pd.read_excel
+                        
+                        df_debtors = load_func_debtor(debtor_file)
+                        df_comms = load_func_comm(comm_file)
+                        
+                        # Temporarily override the API data generators to use the uploaded data
+                        orig_gen_debtors = api.orchestrator.data_generator.generate_debtor_profiles
+                        orig_gen_comms = api.orchestrator.data_generator.generate_communication_data
+                        
+                        api.orchestrator.data_generator.generate_debtor_profiles = lambda n: df_debtors
+                        api.orchestrator.data_generator.generate_communication_data = lambda n: df_comms
+                        
+                        # Train the system
+                        api.setup(n_training_debtors=len(df_debtors), n_training_comms=len(df_comms))
+                        
+                        # Restore original generators
+                        api.orchestrator.data_generator.generate_debtor_profiles = orig_gen_debtors
+                        api.orchestrator.data_generator.generate_communication_data = orig_gen_comms
+                        
+                        st.success("Successfully trained models on your custom data!")
+                        st.rerun()
+                        
+                    except Exception as e:
+                        st.error(f"Error processing files or training models: {str(e)}")
+                        st.warning("Ensure your files match the required column names listed above.")
+            else:
+                st.warning("Please upload both the Debtors and Communications files to proceed.")
 
 # ---------------------------------------------------------
 # PAGE 1: DASHBOARD
 # ---------------------------------------------------------
-if page == "Dashboard Overview":
+elif page == "Dashboard Overview":
     st.title("📊 Agency Dashboard")
     df = api.orchestrator.debtor_data
     
@@ -100,11 +171,11 @@ elif page == "Debtor Analysis Profiler":
         debtor_row = df[df['debtor_id'] == selected_id].iloc[0]
         
         st.subheader("Debtor Profile")
-        st.write(f"**Name:** {debtor_row['first_name']} {debtor_row['last_name']}")
-        st.write(f"**Balance:** ${debtor_row['remaining_balance']:,.2f}")
-        st.write(f"**Days Past Due:** {debtor_row['days_past_due']}")
-        st.write(f"**Credit Score:** {debtor_row['credit_score']}")
-        st.write(f"**Status:** {debtor_row['status'].replace('_', ' ').title()}")
+        st.write(f"**Name:** {debtor_row.get('first_name', '')} {debtor_row.get('last_name', '')}")
+        st.write(f"**Balance:** ${debtor_row.get('remaining_balance', 0):,.2f}")
+        st.write(f"**Days Past Due:** {debtor_row.get('days_past_due', 0)}")
+        st.write(f"**Credit Score:** {debtor_row.get('credit_score', 'N/A')}")
+        st.write(f"**Status:** {str(debtor_row.get('status', '')).replace('_', ' ').title()}")
         
     with col2:
         st.subheader("Simulate Incoming Communication")
