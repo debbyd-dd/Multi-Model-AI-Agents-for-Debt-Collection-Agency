@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import time
 from ai_core import DebtCollectionAPI
 
 # Page Configuration
@@ -26,10 +25,6 @@ api = load_ai_system()
 # ---------------------------------------------------------
 # SIDEBAR NAVIGATION
 # ---------------------------------------------------------
-# Initialize session state for navigation
-if 'nav_page' not in st.session_state:
-    st.session_state.nav_page = "System Setup & Training"
-
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Select Module", 
@@ -39,8 +34,7 @@ page = st.sidebar.radio(
         "Debtor Analysis Profiler", 
         "Batch Priority Analysis", 
         "Compliance Checker"
-    ],
-    key="nav_page"
+    ]
 )
 
 st.sidebar.divider()
@@ -76,23 +70,14 @@ if page == "System Setup & Training":
         n_debtors = st.slider("Training Dataset Size (Debtors)", 100, 2000, 500, step=100)
         n_comms = st.slider("Training Dataset Size (Communications)", 500, 5000, 1000, step=100)
         
-        st.caption("⚠️ **Note for Cloud Deployment:** If using Streamlit Community Cloud, keep sizes under 1500 to avoid out-of-memory crashes.")
-        
-        training_successful = False
         if st.button("Initialize & Train Synthetic Data", type="primary", use_container_width=True):
             with st.spinner("Training Neural Networks, Ensembles, and RL Agents... This may take 1-2 minutes."):
                 try:
                     api.setup(n_training_debtors=n_debtors, n_training_comms=n_comms)
-                    training_successful = True
+                    st.success("System Successfully Trained and Initialized!")
+                    st.rerun()
                 except Exception as e:
                     st.error(f"An error occurred during training: {str(e)}")
-        
-        # Trigger navigation outside of the try/except block for absolute reliability
-        if training_successful:
-            st.success("System Successfully Trained and Initialized! Redirecting to Dashboard...")
-            time.sleep(1.5)
-            st.session_state.nav_page = "Dashboard Overview"
-            st.rerun()
                     
     # --- TAB 2: CUSTOM DATA UPLOAD ---
     with tab2:
@@ -111,7 +96,6 @@ if page == "System Setup & Training":
         with c2:
             comm_file = st.file_uploader("Upload Communications Data", type=['csv', 'xlsx'])
             
-        training_successful_upload = False
         if st.button("Train with Uploaded Data", type="primary", use_container_width=True):
             if debtor_file and comm_file:
                 with st.spinner("Processing custom files and training AI Agents..."):
@@ -137,19 +121,14 @@ if page == "System Setup & Training":
                         api.orchestrator.data_generator.generate_debtor_profiles = orig_gen_debtors
                         api.orchestrator.data_generator.generate_communication_data = orig_gen_comms
                         
-                        training_successful_upload = True
+                        st.success("Successfully trained models on your custom data!")
+                        st.rerun()
+                        
                     except Exception as e:
                         st.error(f"Error processing files or training models: {str(e)}")
                         st.warning("Ensure your files match the required column names listed above.")
             else:
                 st.warning("Please upload both the Debtors and Communications files to proceed.")
-
-        # Trigger navigation outside of the try/except block for absolute reliability
-        if training_successful_upload:
-            st.success("Successfully trained models on your custom data! Redirecting to Dashboard...")
-            time.sleep(1.5)
-            st.session_state.nav_page = "Dashboard Overview"
-            st.rerun()
 
 # ---------------------------------------------------------
 # PAGE 1: DASHBOARD
