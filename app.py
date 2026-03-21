@@ -47,8 +47,8 @@ st.markdown("""
         --bg-primary: #0f1117;
         --bg-secondary: #1a1b26;
         --bg-card: #1e1f2e;
-        --text-primary: #e2e8f0;
-        --text-secondary: #94a3b8;
+        --text-primary: #ffffff;
+        --text-secondary: #ffffff;
         --border: #2d2f3e;
         --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         --gradient-2: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
