@@ -345,7 +345,7 @@ st.markdown("""
     .step-label {
         font-size: 0.72rem;
         font-weight: 600;
-        color: var(--text-secondary);
+        color: var(--text-primary);
         text-align: center;
     }
 
@@ -386,7 +386,7 @@ st.markdown("""
 
     .profile-id {
         font-size: 0.8rem;
-        color: var(--text-secondary);
+        color: var(--text-primary);
         margin-bottom: 1rem;
     }
 
@@ -408,7 +408,7 @@ st.markdown("""
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: var(--text-secondary);
+        color: var(--text-primary);
         font-weight: 600;
     }
 
