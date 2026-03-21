@@ -44,7 +44,7 @@ st.markdown("""
         --danger-light: #fee2e2;
         --info: #3b82f6;
         --info-light: #dbeafe;
-        --bg-primary: #ffffff;
+        --bg-primary: #0f1117;
         --bg-secondary: #1a1b26;
         --bg-card: #0f1117;
         --text-primary: #ffffff;
