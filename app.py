@@ -24,45 +24,59 @@ st.set_page_config(
 )
 
 # =========================================================
-# CUSTOM CSS - MODERN UI THEME
+# CUSTOM CSS - CLEAN WHITE / LIGHT THEME
 # =========================================================
 st.markdown("""
 <style>
     /* ── Import Google Font ── */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-    /* ── Root Variables ── */
+    /* ── Root Variables - LIGHT THEME ── */
     :root {
-        --primary: #6366f1;
-        --primary-light: #818cf8;
-        --primary-dark: #4f46e5;
-        --success: #10b981;
+        --primary: #4f46e5;
+        --primary-light: #6366f1;
+        --primary-dark: #4338ca;
+        --primary-bg: #eef2ff;
+        --success: #059669;
         --success-light: #d1fae5;
-        --warning: #f59e0b;
+        --success-bg: #ecfdf5;
+        --warning: #d97706;
         --warning-light: #fef3c7;
-        --danger: #ef4444;
+        --warning-bg: #fffbeb;
+        --danger: #dc2626;
         --danger-light: #fee2e2;
-        --info: #3b82f6;
+        --danger-bg: #fef2f2;
+        --info: #2563eb;
         --info-light: #dbeafe;
-        --bg-primary: #0f1117;
-        --bg-secondary: #1a1b26;
-        --bg-card: #0f1117;
-        --text-primary: #ffffff;
-        --text-secondary: #0f1117;
-        --border: #2d2f3e;
-        --gradient-1: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-        --gradient-2: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-        --gradient-3: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-        --gradient-4: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-        --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-        --shadow-md: 0 4px 6px rgba(0,0,0,0.3);
-        --shadow-lg: 0 10px 25px rgba(0,0,0,0.4);
-        --shadow-glow: 0 0 20px rgba(99,102,241,0.15);
+        --info-bg: #eff6ff;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-hover: #f1f5f9;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --border-light: #f1f5f9;
+        --gradient-1: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        --gradient-2: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+        --gradient-3: linear-gradient(135deg, #059669 0%, #10b981 100%);
+        --gradient-4: linear-gradient(135deg, #d97706 0%, #f59e0b 100%);
+        --gradient-5: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
+        --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+        --shadow-lg: 0 10px 15px rgba(0,0,0,0.06), 0 4px 6px rgba(0,0,0,0.04);
+        --shadow-xl: 0 20px 25px rgba(0,0,0,0.08), 0 8px 10px rgba(0,0,0,0.04);
     }
 
     /* ── Global Styles ── */
     html, body, [class*="css"] {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    }
+
+    .main {
+        background-color: #f8fafc !important;
     }
 
     .main .block-container {
@@ -70,33 +84,77 @@ st.markdown("""
         max-width: 1400px;
     }
 
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg-primary); }
-    ::-webkit-scrollbar-thumb {
-        background: var(--border);
-        border-radius: 3px;
+    /* Force all text to be dark and readable */
+    .main p, .main span, .main div, .main label, .main li {
+        color: var(--text-primary) !important;
     }
-    ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+    .main .stMarkdown p {
+        color: var(--text-primary) !important;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-secondary); }
+    ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
 
     /* ── Sidebar Styling ── */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #13141f 0%, #1a1b2e 100%);
+        background: #ffffff !important;
         border-right: 1px solid var(--border);
+        box-shadow: 2px 0 8px rgba(0,0,0,0.04);
     }
 
     section[data-testid="stSidebar"] .block-container {
         padding-top: 1rem;
     }
 
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] div,
+    section[data-testid="stSidebar"] label {
+        color: var(--text-primary) !important;
+    }
+
+    /* ── Scroll to Top Button ── */
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 9999;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--gradient-1);
+        color: white !important;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow: 0 4px 15px rgba(79,70,229,0.4);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+    }
+
+    .scroll-top-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 6px 20px rgba(79,70,229,0.5);
+    }
+
     /* ── Header Cards ── */
     .page-header {
-        background: linear-gradient(135deg, #1e1f2e 0%, #252640 100%);
+        background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 2rem 2.5rem;
         margin-bottom: 2rem;
-        box-shadow: var(--shadow-lg);
+        box-shadow: var(--shadow-md);
         position: relative;
         overflow: hidden;
     }
@@ -105,23 +163,23 @@ st.markdown("""
         content: '';
         position: absolute;
         top: 0; left: 0; right: 0;
-        height: 3px;
+        height: 4px;
         background: var(--gradient-1);
     }
 
     .page-header h1 {
-        font-size: 1.85rem;
-        font-weight: 800;
-        margin: 0 0 0.5rem 0;
-        background: var(--gradient-1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        font-size: 1.85rem !important;
+        font-weight: 800 !important;
+        margin: 0 0 0.5rem 0 !important;
+        background: var(--gradient-1) !important;
+        -webkit-background-clip: text !important;
+        -webkit-text-fill-color: transparent !important;
+        background-clip: text !important;
         letter-spacing: -0.02em;
     }
 
-    .page-header p {
-        color: var(--text-primary);
+    .page-header .header-desc {
+        color: var(--text-secondary) !important;
         font-size: 0.95rem;
         margin: 0;
         line-height: 1.6;
@@ -136,12 +194,13 @@ st.markdown("""
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         position: relative;
         overflow: hidden;
+        box-shadow: var(--shadow-sm);
     }
 
     .metric-card:hover {
         transform: translateY(-3px);
-        box-shadow: var(--shadow-glow);
-        border-color: var(--primary);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary-light);
     }
 
     .metric-card .metric-icon {
@@ -151,62 +210,72 @@ st.markdown("""
     }
 
     .metric-card .metric-label {
-        font-size: 0.78rem;
-        font-weight: 600;
+        font-size: 0.75rem;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: var(--text-secondary);
+        color: var(--text-secondary) !important;
         margin-bottom: 0.35rem;
     }
 
     .metric-card .metric-value {
         font-size: 1.75rem;
         font-weight: 800;
-        color: var(--text-primary);
+        color: var(--text-primary) !important;
         line-height: 1.2;
     }
 
     .metric-card .metric-delta {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: 600;
         margin-top: 0.4rem;
         display: inline-flex;
         align-items: center;
         gap: 0.25rem;
-        padding: 0.15rem 0.5rem;
+        padding: 0.2rem 0.6rem;
         border-radius: 6px;
     }
 
     .metric-delta.positive {
-        color: var(--success);
-        background: rgba(16,185,129,0.1);
+        color: var(--success) !important;
+        background: var(--success-light);
     }
 
     .metric-delta.negative {
-        color: var(--danger);
-        background: rgba(239,68,68,0.1);
+        color: var(--danger) !important;
+        background: var(--danger-light);
+    }
+
+    .metric-delta.neutral {
+        color: var(--text-secondary) !important;
+        background: var(--bg-secondary);
     }
 
     /* gradient top bar variants */
     .metric-card.purple::before {
         content: ''; position: absolute;
-        top: 0; left: 0; right: 0; height: 3px;
+        top: 0; left: 0; right: 0; height: 4px;
         background: var(--gradient-1);
     }
     .metric-card.blue::before {
         content: ''; position: absolute;
-        top: 0; left: 0; right: 0; height: 3px;
+        top: 0; left: 0; right: 0; height: 4px;
         background: var(--gradient-2);
     }
     .metric-card.green::before {
         content: ''; position: absolute;
-        top: 0; left: 0; right: 0; height: 3px;
+        top: 0; left: 0; right: 0; height: 4px;
         background: var(--gradient-3);
     }
     .metric-card.amber::before {
         content: ''; position: absolute;
-        top: 0; left: 0; right: 0; height: 3px;
+        top: 0; left: 0; right: 0; height: 4px;
         background: var(--gradient-4);
+    }
+    .metric-card.red::before {
+        content: ''; position: absolute;
+        top: 0; left: 0; right: 0; height: 4px;
+        background: var(--gradient-5);
     }
 
     /* ── Section Cards ── */
@@ -220,13 +289,17 @@ st.markdown("""
     }
 
     .section-card h3 {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: var(--text-primary);
-        margin-bottom: 1rem;
+        font-size: 1.05rem !important;
+        font-weight: 700 !important;
+        color: var(--text-primary) !important;
+        margin-bottom: 0.5rem !important;
         display: flex;
         align-items: center;
         gap: 0.5rem;
+    }
+
+    .section-card p {
+        color: var(--text-secondary) !important;
     }
 
     /* ── Status Badges ── */
@@ -236,39 +309,39 @@ st.markdown("""
         gap: 0.3rem;
         padding: 0.3rem 0.75rem;
         border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 600;
-        letter-spacing: 0.02em;
+        font-size: 0.73rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
     }
 
     .badge-success {
-        background: rgba(16,185,129,0.15);
-        color: var(--success);
-        border: 1px solid rgba(16,185,129,0.3);
+        background: var(--success-light);
+        color: var(--success) !important;
+        border: 1px solid #a7f3d0;
     }
 
     .badge-danger {
-        background: rgba(239,68,68,0.15);
-        color: var(--danger);
-        border: 1px solid rgba(239,68,68,0.3);
+        background: var(--danger-light);
+        color: var(--danger) !important;
+        border: 1px solid #fecaca;
     }
 
     .badge-warning {
-        background: rgba(245,158,11,0.15);
-        color: var(--warning);
-        border: 1px solid rgba(245,158,11,0.3);
+        background: var(--warning-light);
+        color: var(--warning) !important;
+        border: 1px solid #fde68a;
     }
 
     .badge-info {
-        background: rgba(59,130,246,0.15);
-        color: var(--info);
-        border: 1px solid rgba(59,130,246,0.3);
+        background: var(--info-light);
+        color: var(--info) !important;
+        border: 1px solid #93c5fd;
     }
 
     .badge-purple {
-        background: rgba(99,102,241,0.15);
-        color: var(--primary-light);
-        border: 1px solid rgba(99,102,241,0.3);
+        background: var(--primary-bg);
+        color: var(--primary) !important;
+        border: 1px solid #c7d2fe;
     }
 
     /* ── Risk Level Indicators ── */
@@ -276,28 +349,28 @@ st.markdown("""
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.5rem 1rem;
+        padding: 0.6rem 1.2rem;
         border-radius: 10px;
         font-weight: 700;
         font-size: 0.9rem;
     }
 
     .risk-high {
-        background: linear-gradient(135deg, rgba(239,68,68,0.2), rgba(239,68,68,0.05));
-        color: #fca5a5;
-        border: 1px solid rgba(239,68,68,0.3);
+        background: var(--danger-bg);
+        color: var(--danger) !important;
+        border: 1px solid #fecaca;
     }
 
     .risk-medium {
-        background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(245,158,11,0.05));
-        color: #fcd34d;
-        border: 1px solid rgba(245,158,11,0.3);
+        background: var(--warning-bg);
+        color: var(--warning) !important;
+        border: 1px solid #fde68a;
     }
 
     .risk-low {
-        background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.05));
-        color: #6ee7b7;
-        border: 1px solid rgba(16,185,129,0.3);
+        background: var(--success-bg);
+        color: var(--success) !important;
+        border: 1px solid #a7f3d0;
     }
 
     /* ── Progress Steps ── */
@@ -318,7 +391,7 @@ st.markdown("""
     }
 
     .step-circle {
-        width: 40px; height: 40px;
+        width: 42px; height: 42px;
         border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
         font-weight: 700; font-size: 0.9rem;
@@ -327,25 +400,25 @@ st.markdown("""
 
     .step-circle.active {
         background: var(--gradient-1);
-        color: white;
-        box-shadow: 0 0 15px rgba(99,102,241,0.4);
+        color: white !important;
+        box-shadow: 0 0 15px rgba(79,70,229,0.3);
     }
 
     .step-circle.completed {
         background: var(--success);
-        color: white;
+        color: white !important;
     }
 
     .step-circle.pending {
         background: var(--bg-secondary);
-        color: var(--text-secondary);
+        color: var(--text-muted) !important;
         border: 2px solid var(--border);
     }
 
     .step-label {
         font-size: 0.72rem;
         font-weight: 600;
-        color: var(--text-primary);
+        color: var(--text-secondary) !important;
         text-align: center;
     }
 
@@ -360,11 +433,12 @@ st.markdown("""
 
     /* ── Profile Card ── */
     .profile-card {
-        background: linear-gradient(135deg, #1e1f2e, #252640);
+        background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 1.8rem;
         text-align: center;
+        box-shadow: var(--shadow-md);
     }
 
     .profile-avatar {
@@ -372,21 +446,21 @@ st.markdown("""
         border-radius: 50%;
         background: var(--gradient-1);
         display: flex; align-items: center; justify-content: center;
-        font-size: 1.8rem; font-weight: 800; color: white;
+        font-size: 1.8rem; font-weight: 800; color: white !important;
         margin: 0 auto 1rem auto;
-        box-shadow: 0 0 20px rgba(99,102,241,0.3);
+        box-shadow: 0 4px 15px rgba(79,70,229,0.3);
     }
 
     .profile-name {
         font-size: 1.2rem;
         font-weight: 700;
-        color: var(--text-primary);
+        color: var(--text-primary) !important;
         margin-bottom: 0.25rem;
     }
 
     .profile-id {
         font-size: 0.8rem;
-        color: var(--text-primary);
+        color: var(--text-secondary) !important;
         margin-bottom: 1rem;
     }
 
@@ -398,7 +472,7 @@ st.markdown("""
     }
 
     .profile-stat {
-        background: rgba(255,255,255,0.03);
+        background: var(--bg-secondary);
         border: 1px solid var(--border);
         border-radius: 10px;
         padding: 0.75rem;
@@ -408,14 +482,14 @@ st.markdown("""
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: var(--text-primary);
-        font-weight: 600;
+        color: var(--text-secondary) !important;
+        font-weight: 700;
     }
 
     .profile-stat-value {
         font-size: 1.05rem;
         font-weight: 700;
-        color: var(--text-primary);
+        color: var(--text-primary) !important;
         margin-top: 0.15rem;
     }
 
@@ -424,38 +498,96 @@ st.markdown("""
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: 14px;
-        padding: 1.5rem;
+        padding: 1.3rem;
         margin-bottom: 0.75rem;
+        box-shadow: var(--shadow-xs);
     }
 
     .analysis-panel h4 {
-        font-size: 0.85rem;
+        font-size: 0.82rem !important;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: var(--text-secondary);
-        font-weight: 600;
+        color: var(--text-secondary) !important;
+        font-weight: 700;
         margin-bottom: 0.75rem;
     }
 
-    /* ── Training Animation ── */
-    .training-progress {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 2rem;
-        text-align: center;
+    /* ── Custom Alerts ── */
+    .custom-alert {
+        padding: 1rem 1.25rem;
+        border-radius: 10px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        display: flex;
+        align-items: flex-start;
+        gap: 0.6rem;
+        margin-bottom: 0.75rem;
     }
 
-    .training-progress h3 {
-        color: var(--primary-light);
-        margin-bottom: 0.5rem;
+    .alert-info {
+        background: var(--info-bg);
+        border: 1px solid #bfdbfe;
+        color: #1e40af !important;
     }
 
-    /* ── Data table enhancement ── */
-    .stDataFrame {
-        border-radius: 12px;
-        overflow: hidden;
+    .alert-info * { color: #1e40af !important; }
+
+    .alert-success {
+        background: var(--success-bg);
+        border: 1px solid #a7f3d0;
+        color: #065f46 !important;
     }
+
+    .alert-success * { color: #065f46 !important; }
+
+    .alert-warning {
+        background: var(--warning-bg);
+        border: 1px solid #fde68a;
+        color: #92400e !important;
+    }
+
+    .alert-warning * { color: #92400e !important; }
+
+    .alert-danger {
+        background: var(--danger-bg);
+        border: 1px solid #fecaca;
+        color: #991b1b !important;
+    }
+
+    .alert-danger * { color: #991b1b !important; }
+
+    /* ── Compliance Violation Card ── */
+    .violation-card {
+        background: var(--danger-bg);
+        border: 1px solid #fecaca;
+        border-left: 4px solid var(--danger);
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .violation-card .violation-rule {
+        font-weight: 700;
+        color: var(--danger) !important;
+        font-size: 0.88rem;
+    }
+
+    .violation-card .violation-desc {
+        color: var(--text-secondary) !important;
+        font-size: 0.82rem;
+        margin-top: 0.25rem;
+    }
+
+    .warning-card {
+        background: var(--warning-bg);
+        border: 1px solid #fde68a;
+        border-left: 4px solid var(--warning);
+        border-radius: 10px;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .warning-card * { color: #92400e !important; }
 
     /* ── Tabs ── */
     .stTabs [data-baseweb="tab-list"] {
@@ -471,6 +603,7 @@ st.markdown("""
         font-weight: 600;
         font-size: 0.85rem;
         padding: 0.5rem 1rem;
+        color: var(--text-secondary) !important;
     }
 
     .stTabs [aria-selected="true"] {
@@ -479,151 +612,234 @@ st.markdown("""
     }
 
     /* ── Buttons ── */
-    .stButton > button[kind="primary"] {
-        background: var(--gradient-1);
-        border: none;
-        border-radius: 10px;
-        font-weight: 600;
-        padding: 0.6rem 1.5rem;
-        transition: all 0.3s;
-        box-shadow: 0 4px 15px rgba(99,102,241,0.3);
+    .stButton > button {
+        border-radius: 10px !important;
+        font-weight: 600 !important;
+        font-family: 'Inter', sans-serif !important;
+        transition: all 0.3s !important;
     }
 
-    .stButton > button[kind="primary"]:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(99,102,241,0.4);
+    .stButton > button[kind="primary"],
+    .stButton > button[data-testid="stBaseButton-primary"] {
+        background: var(--gradient-1) !important;
+        border: none !important;
+        color: white !important;
+        padding: 0.6rem 1.5rem !important;
+        box-shadow: 0 4px 12px rgba(79,70,229,0.25) !important;
+    }
+
+    .stButton > button[kind="primary"]:hover,
+    .stButton > button[data-testid="stBaseButton-primary"]:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 20px rgba(79,70,229,0.35) !important;
+    }
+
+    .stButton > button[kind="secondary"],
+    .stButton > button[data-testid="stBaseButton-secondary"] {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        color: var(--text-primary) !important;
+    }
+
+    .stButton > button[kind="secondary"]:hover,
+    .stButton > button[data-testid="stBaseButton-secondary"]:hover {
+        background: var(--bg-secondary) !important;
+        border-color: var(--primary-light) !important;
+    }
+
+    /* ── Inputs ── */
+    .stSelectbox > div > div,
+    .stTextArea > div > div > textarea,
+    .stTextInput > div > div > input,
+    .stNumberInput > div > div > input {
+        background: var(--bg-card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
+        color: var(--text-primary) !important;
+    }
+
+    .stSelectbox > div > div:focus-within,
+    .stTextArea > div > div > textarea:focus,
+    .stTextInput > div > div > input:focus {
+        border-color: var(--primary-light) !important;
+        box-shadow: 0 0 0 2px rgba(79,70,229,0.15) !important;
     }
 
     /* ── Expanders ── */
     .streamlit-expanderHeader {
-        font-weight: 600;
-        border-radius: 10px;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        background: var(--bg-card) !important;
+        color: var(--text-primary) !important;
     }
 
-    /* ── Toast / Alerts ── */
-    .custom-alert {
-        padding: 1rem 1.25rem;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        font-weight: 500;
-        display: flex;
-        align-items: flex-start;
-        gap: 0.6rem;
-        margin-bottom: 0.75rem;
+    /* ── Data tables ── */
+    .stDataFrame {
+        border-radius: 12px !important;
+        overflow: hidden;
+        border: 1px solid var(--border) !important;
     }
 
-    .alert-info {
-        background: rgba(59,130,246,0.1);
-        border: 1px solid rgba(59,130,246,0.25);
-        color: #93c5fd;
+    /* ── Slider ── */
+    .stSlider > div > div > div > div {
+        background: var(--primary-light) !important;
     }
 
-    .alert-success {
-        background: rgba(16,185,129,0.1);
-        border: 1px solid rgba(16,185,129,0.25);
-        color: #6ee7b7;
-    }
-
-    .alert-warning {
-        background: rgba(245,158,11,0.1);
-        border: 1px solid rgba(245,158,11,0.25);
-        color: #fcd34d;
-    }
-
-    .alert-danger {
-        background: rgba(239,68,68,0.1);
-        border: 1px solid rgba(239,68,68,0.25);
-        color: #fca5a5;
-    }
-
-    /* ── Compliance Violation Card ── */
-    .violation-card {
-        background: rgba(239,68,68,0.06);
-        border: 1px solid rgba(239,68,68,0.2);
-        border-left: 4px solid var(--danger);
-        border-radius: 10px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.6rem;
-    }
-
-    .violation-card .violation-rule {
-        font-weight: 700;
-        color: #fca5a5;
-        font-size: 0.88rem;
-    }
-
-    .violation-card .violation-desc {
-        color: var(--text-secondary);
-        font-size: 0.82rem;
-        margin-top: 0.25rem;
-    }
-
-    .warning-card {
-        background: rgba(245,158,11,0.06);
-        border: 1px solid rgba(245,158,11,0.2);
-        border-left: 4px solid var(--warning);
-        border-radius: 10px;
-        padding: 1rem 1.25rem;
-        margin-bottom: 0.6rem;
+    /* ── Toggle ── */
+    .stCheckbox label span,
+    .stToggle label span {
+        color: var(--text-primary) !important;
     }
 
     /* ── Footer ── */
     .app-footer {
         text-align: center;
         padding: 2rem 0 1rem 0;
-        color: var(--text-secondary);
+        color: var(--text-secondary) !important;
         font-size: 0.75rem;
         border-top: 1px solid var(--border);
         margin-top: 3rem;
     }
 
-    /* ── Responsive Adjustments ── */
-    @media (max-width: 768px) {
-        .main .block-container {
-            padding: 1rem;
-        }
-        .page-header {
-            padding: 1.5rem;
-        }
-        .page-header h1 {
-            font-size: 1.4rem;
-        }
-        .metric-card .metric-value {
-            font-size: 1.3rem;
-        }
-        .profile-stats {
-            grid-template-columns: 1fr;
-        }
+    .app-footer p { color: var(--text-secondary) !important; }
+
+    /* ── Status card in sidebar ── */
+    .sidebar-status-online {
+        background: var(--success-bg);
+        border: 1px solid #a7f3d0;
+        border-radius: 10px;
+        padding: 0.9rem;
     }
 
-    /* ── Hide default Streamlit chrome ── */
+    .sidebar-status-online * { color: #065f46 !important; }
+
+    .sidebar-status-offline {
+        background: var(--danger-bg);
+        border: 1px solid #fecaca;
+        border-radius: 10px;
+        padding: 0.9rem;
+    }
+
+    .sidebar-status-offline * { color: #991b1b !important; }
+
+    /* ── Sidebar Brand ── */
+    .sidebar-brand {
+        text-align: center;
+        padding: 1rem 0 0.5rem 0;
+    }
+
+    .sidebar-brand .brand-icon { font-size: 2.5rem; margin-bottom: 0.25rem; }
+
+    .sidebar-brand .brand-name {
+        font-size: 1.1rem;
+        font-weight: 800;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.02em;
+    }
+
+    .sidebar-brand .brand-sub {
+        font-size: 0.7rem;
+        color: var(--text-muted) !important;
+        margin-top: 0.15rem;
+    }
+
+    /* ── Sidebar nav label ── */
+    .sidebar-nav-label {
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-muted) !important;
+        margin-bottom: 0.5rem;
+    }
+
+    /* ── Estimate cards ── */
+    .estimate-card {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    .estimate-card h4 {
+        font-size: 0.75rem !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--text-secondary) !important;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+    }
+
+    .estimate-value {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .estimate-value.purple { color: var(--primary) !important; }
+    .estimate-value.green { color: var(--success) !important; }
+    .estimate-value.amber { color: var(--warning) !important; }
+
+    /* ── File upload indicator ── */
+    .file-loaded {
+        background: var(--success-bg);
+        border: 1px solid #a7f3d0;
+        border-radius: 8px;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.82rem;
+        color: #065f46 !important;
+        font-weight: 600;
+        margin-top: 0.5rem;
+    }
+
+    .file-loaded * { color: #065f46 !important; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+        .main .block-container { padding: 1rem; }
+        .page-header { padding: 1.5rem; }
+        .page-header h1 { font-size: 1.4rem !important; }
+        .metric-card .metric-value { font-size: 1.3rem; }
+        .profile-stats { grid-template-columns: 1fr; }
+        .progress-container { flex-wrap: wrap; gap: 0.5rem; }
+        .step-connector { display: none; }
+        .scroll-top-btn { bottom: 1rem; right: 1rem; width: 42px; height: 42px; }
+    }
+
+    /* ── Hide Streamlit chrome ── */
     #MainMenu { visibility: hidden; }
     header { visibility: hidden; }
     footer { visibility: hidden; }
 
-    /* ── Smooth animations ── */
+    /* ── Animations ── */
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
-    .animate-in {
-        animation: fadeInUp 0.5s ease-out;
-    }
+    .animate-in { animation: fadeInUp 0.5s ease-out; }
 
-    @keyframes pulse {
+    @keyframes pulse-anim {
         0%, 100% { opacity: 1; }
         50% { opacity: 0.5; }
     }
 
-    .pulse { animation: pulse 2s infinite; }
-
-    /* ── Gauge styling ── */
-    .gauge-container {
-        text-align: center;
-        padding: 1rem;
-    }
+    .pulse-anim { animation: pulse-anim 2s infinite; }
 </style>
+""", unsafe_allow_html=True)
+
+# =========================================================
+# SCROLL TO TOP BUTTON + ANCHOR
+# =========================================================
+st.markdown('<div id="top-anchor"></div>', unsafe_allow_html=True)
+
+st.markdown("""
+<a href="#top-anchor" class="scroll-top-btn" title="Scroll to top">
+    ↑
+</a>
 """, unsafe_allow_html=True)
 
 
@@ -634,17 +850,24 @@ def render_page_header(icon: str, title: str, description: str):
     st.markdown(f"""
     <div class="page-header animate-in">
         <h1>{icon} {title}</h1>
-        <p>{description}</p>
+        <p class="header-desc">{description}</p>
     </div>
     """, unsafe_allow_html=True)
 
 
-def render_metric_card(icon: str, label: str, value: str, delta: str = None, 
+def render_metric_card(icon: str, label: str, value: str, delta: str = None,
                        delta_positive: bool = True, color_class: str = "purple"):
     delta_html = ""
     if delta:
-        dc = "positive" if delta_positive else "negative"
-        arrow = "↑" if delta_positive else "↓"
+        if delta_positive:
+            dc = "positive"
+            arrow = "↑"
+        elif delta_positive is False:
+            dc = "negative"
+            arrow = "↓"
+        else:
+            dc = "neutral"
+            arrow = "→"
         delta_html = f'<div class="metric-delta {dc}">{arrow} {delta}</div>'
 
     st.markdown(f"""
@@ -663,31 +886,34 @@ def render_badge(text: str, badge_type: str = "info"):
 
 def render_risk_indicator(level: str):
     level_lower = level.lower()
-    cls = "risk-low" if level_lower == "low" else ("risk-medium" if level_lower == "medium" else "risk-high")
-    icon = "🟢" if level_lower == "low" else ("🟡" if level_lower == "medium" else "🔴")
+    if level_lower == "low":
+        cls, icon = "risk-low", "🟢"
+    elif level_lower == "medium":
+        cls, icon = "risk-medium", "🟡"
+    else:
+        cls, icon = "risk-high", "🔴"
     return f'<div class="risk-indicator {cls}">{icon} {level.upper()} RISK</div>'
 
 
 def create_gauge_chart(value: float, title: str, max_val: float = 100):
-    """Create a modern gauge chart."""
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
-        title={'text': title, 'font': {'size': 14, 'color': '#94a3b8'}},
-        number={'font': {'size': 32, 'color': '#e2e8f0'}},
+        title={'text': title, 'font': {'size': 14, 'color': '#475569'}},
+        number={'font': {'size': 32, 'color': '#0f172a'}},
         gauge={
-            'axis': {'range': [0, max_val], 'tickcolor': '#4a4b5e',
-                     'tickfont': {'color': '#94a3b8'}},
-            'bar': {'color': '#6366f1'},
-            'bgcolor': '#1e1f2e',
+            'axis': {'range': [0, max_val], 'tickcolor': '#94a3b8',
+                     'tickfont': {'color': '#475569'}},
+            'bar': {'color': '#4f46e5'},
+            'bgcolor': '#f1f5f9',
             'borderwidth': 0,
             'steps': [
-                {'range': [0, max_val * 0.33], 'color': 'rgba(16,185,129,0.15)'},
-                {'range': [max_val * 0.33, max_val * 0.66], 'color': 'rgba(245,158,11,0.15)'},
-                {'range': [max_val * 0.66, max_val], 'color': 'rgba(239,68,68,0.15)'}
+                {'range': [0, max_val * 0.33], 'color': '#d1fae5'},
+                {'range': [max_val * 0.33, max_val * 0.66], 'color': '#fef3c7'},
+                {'range': [max_val * 0.66, max_val], 'color': '#fee2e2'}
             ],
             'threshold': {
-                'line': {'color': '#818cf8', 'width': 3},
+                'line': {'color': '#4f46e5', 'width': 3},
                 'thickness': 0.8,
                 'value': value
             }
@@ -696,7 +922,7 @@ def create_gauge_chart(value: float, title: str, max_val: float = 100):
     fig.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
-        font={'color': '#e2e8f0'},
+        font={'color': '#0f172a'},
         height=220,
         margin=dict(l=30, r=30, t=40, b=10)
     )
@@ -712,6 +938,11 @@ def render_footer():
     """, unsafe_allow_html=True)
 
 
+def safe_navigate(target_page: str):
+    """Safely navigate to another page without conflicting with widget keys."""
+    st.query_params["page"] = target_page
+
+
 # =========================================================
 # CACHING THE AI SYSTEM
 # =========================================================
@@ -724,16 +955,33 @@ api = load_ai_system()
 # =========================================================
 # SESSION STATE INITIALIZATION
 # =========================================================
-if 'nav_page' not in st.session_state:
-    st.session_state.nav_page = "System Setup & Training"
 if 'analysis_history' not in st.session_state:
     st.session_state.analysis_history = []
 if 'batch_results' not in st.session_state:
     st.session_state.batch_results = None
-if 'dark_mode' not in st.session_state:
-    st.session_state.dark_mode = True
 if 'export_format' not in st.session_state:
     st.session_state.export_format = 'csv'
+if 'training_done' not in st.session_state:
+    st.session_state.training_done = False
+if 'upload_training_done' not in st.session_state:
+    st.session_state.upload_training_done = False
+
+# Handle navigation via query params (avoids widget key conflicts)
+if "page" in st.query_params:
+    target = st.query_params["page"]
+    valid_pages = [
+        "System Setup & Training", "Dashboard Overview",
+        "Debtor Analysis Profiler", "Batch Priority Analysis",
+        "Compliance Checker", "Analytics & Reports", "Settings"
+    ]
+    if target in valid_pages:
+        default_index = valid_pages.index(target)
+        # Clear after reading
+        del st.query_params["page"]
+    else:
+        default_index = 0
+else:
+    default_index = 0
 
 # =========================================================
 # SIDEBAR
@@ -741,26 +989,17 @@ if 'export_format' not in st.session_state:
 with st.sidebar:
     # Logo / Brand
     st.markdown("""
-    <div style="text-align:center; padding:1rem 0 0.5rem 0;">
-        <div style="font-size:2.5rem; margin-bottom:0.25rem;">🤖</div>
-        <div style="font-size:1.1rem; font-weight:800;
-             background:linear-gradient(135deg,#6366f1,#8b5cf6);
-             -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-             background-clip:text; letter-spacing:-0.02em;">
-            DebtCollect AI
-        </div>
-        <div style="font-size:0.7rem; color:#94a3b8; margin-top:0.15rem;">
-            Multi-Agent Collection Platform
-        </div>
+    <div class="sidebar-brand">
+        <div class="brand-icon">🤖</div>
+        <div class="brand-name">DebtCollect AI</div>
+        <div class="brand-sub">Multi-Agent Collection Platform</div>
     </div>
     """, unsafe_allow_html=True)
 
     st.markdown("---")
 
     # Navigation
-    st.markdown('<p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; '
-                'letter-spacing:0.1em; color:#64748b; margin-bottom:0.5rem;">📍 Navigation</p>',
-                unsafe_allow_html=True)
+    st.markdown('<p class="sidebar-nav-label">📍 Navigation</p>', unsafe_allow_html=True)
 
     nav_items = {
         "System Setup & Training": "⚙️",
@@ -776,42 +1015,41 @@ with st.sidebar:
         "Navigate",
         list(nav_items.keys()),
         format_func=lambda x: f"{nav_items[x]}  {x}",
-        key="nav_page",
+        index=default_index,
+        key="nav_radio",
         label_visibility="collapsed"
     )
 
     st.markdown("---")
 
     # System Status Panel
-    st.markdown('<p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; '
-                'letter-spacing:0.1em; color:#64748b; margin-bottom:0.5rem;">🖥️ System Status</p>',
-                unsafe_allow_html=True)
+    st.markdown('<p class="sidebar-nav-label">🖥️ System Status</p>', unsafe_allow_html=True)
 
     status = api.get_status()
 
     if status['system_initialized']:
+        debtors_count = status['data_stats'].get('debtors_loaded', 0)
+        comms_count = status['data_stats'].get('communications_loaded', 0)
         st.markdown(f"""
-        <div style="background:rgba(16,185,129,0.08); border:1px solid rgba(16,185,129,0.2);
-                    border-radius:10px; padding:0.9rem;">
+        <div class="sidebar-status-online">
             <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.6rem;">
-                <span class="badge badge-success">● ONLINE</span>
+                {render_badge("● ONLINE", "success")}
             </div>
-            <div style="font-size:0.75rem; color:#94a3b8; line-height:1.8;">
-                👥 Debtors: <strong style="color:#e2e8f0">{status['data_stats'].get('debtors_loaded', 0):,}</strong><br>
-                💬 Communications: <strong style="color:#e2e8f0">{status['data_stats'].get('communications_loaded', 0):,}</strong><br>
-                🕐 Last Updated: <strong style="color:#e2e8f0">{datetime.now().strftime('%H:%M')}</strong>
+            <div style="font-size:0.78rem; line-height:1.9;">
+                👥 Debtors: <strong>{debtors_count:,}</strong><br>
+                💬 Communications: <strong>{comms_count:,}</strong><br>
+                🕐 Last Updated: <strong>{datetime.now().strftime('%H:%M')}</strong>
             </div>
         </div>
         """, unsafe_allow_html=True)
     else:
-        st.markdown("""
-        <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.2);
-                    border-radius:10px; padding:0.9rem;">
+        st.markdown(f"""
+        <div class="sidebar-status-offline">
             <div style="display:flex; align-items:center; gap:0.4rem; margin-bottom:0.4rem;">
-                <span class="badge badge-danger">● OFFLINE</span>
+                {render_badge("● OFFLINE", "danger")}
             </div>
-            <div style="font-size:0.75rem; color:#94a3b8;">
-                Train models to activate the system.
+            <div style="font-size:0.78rem;">
+                Train models to activate.
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -819,34 +1057,33 @@ with st.sidebar:
     st.markdown("---")
 
     # Quick Actions
-    st.markdown('<p style="font-size:0.7rem; font-weight:700; text-transform:uppercase; '
-                'letter-spacing:0.1em; color:#64748b; margin-bottom:0.5rem;">⚡ Quick Actions</p>',
-                unsafe_allow_html=True)
+    st.markdown('<p class="sidebar-nav-label">⚡ Quick Actions</p>', unsafe_allow_html=True)
 
     if st.button("🔄 Refresh Data", use_container_width=True):
         st.cache_resource.clear()
         st.rerun()
 
     if api.initialized:
-        if st.button("📥 Export All Data", use_container_width=True):
-            df = api.orchestrator.debtor_data
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label="⬇️ Download CSV",
-                data=csv,
-                file_name=f"debtors_export_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
-                mime="text/csv",
-                use_container_width=True
-            )
+        df_export = api.orchestrator.debtor_data
+        csv_sidebar = df_export.to_csv(index=False)
+        st.download_button(
+            label="📥 Export All Data",
+            data=csv_sidebar,
+            file_name=f"debtors_export_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+            mime="text/csv",
+            use_container_width=True
+        )
 
 
 # =========================================================
 # GATE: require initialization for most pages
 # =========================================================
 if not api.initialized and page not in ("System Setup & Training", "Settings"):
-    render_page_header("⚠️", "System Not Initialized",
-                       "The AI agents need to be trained before you can use this module. "
-                       "Please go to System Setup & Training to get started.")
+    render_page_header(
+        "⚠️", "System Not Initialized",
+        "The AI agents need to be trained before you can use this module. "
+        "Please go to System Setup & Training to get started."
+    )
 
     st.markdown("""
     <div class="custom-alert alert-warning">
@@ -862,9 +1099,10 @@ if not api.initialized and page not in ("System Setup & Training", "Settings"):
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         if st.button("🚀 Go to Setup", type="primary", use_container_width=True):
-            st.session_state.nav_page = "System Setup & Training"
+            safe_navigate("System Setup & Training")
             st.rerun()
     st.stop()
+
 
 # =========================================================
 # PAGE: SYSTEM SETUP & TRAINING
@@ -909,55 +1147,57 @@ if page == "System Setup & Training":
 
     tab1, tab2 = st.tabs(["🧬 Synthetic Data Generator", "📁 Upload Custom Data"])
 
-    # --- TAB 1: SYNTHETIC ---
+    # --- TAB 1: SYNTHETIC DATA ---
     with tab1:
         st.markdown("""
         <div class="section-card">
             <h3>🧬 Generate Synthetic Training Data</h3>
-            <p style="color:var(--text-secondary); font-size:0.88rem;">
-                Use the built-in data generator to simulate realistic debtor profiles and
-                communication records. Ideal for demos, testing, and initial deployment.
-            </p>
+            <p>Use the built-in data generator to simulate realistic debtor profiles and
+            communication records. Ideal for demos, testing, and initial deployment.</p>
         </div>
         """, unsafe_allow_html=True)
 
         col1, col2 = st.columns(2)
         with col1:
-            n_debtors = st.slider("📊 Number of Debtor Profiles", 100, 2000, 500, step=100,
-                                  help="More profiles = better model accuracy but longer training.")
+            n_debtors = st.slider(
+                "📊 Number of Debtor Profiles", 100, 2000, 500, step=100,
+                help="More profiles = better model accuracy but longer training time."
+            )
         with col2:
-            n_comms = st.slider("💬 Number of Communications", 500, 5000, 1000, step=100,
-                                help="Communication records for NLP and sentiment models.")
+            n_comms = st.slider(
+                "💬 Number of Communications", 500, 5000, 1000, step=100,
+                help="Communication records used to train NLP and sentiment models."
+            )
 
-        # Resource estimate
+        # Resource estimates
         est_time = max(30, (n_debtors + n_comms) // 50)
         est_mem = max(50, (n_debtors + n_comms) // 20)
 
         c1, c2, c3 = st.columns(3)
         with c1:
             st.markdown(f"""
-            <div class="analysis-panel" style="text-align:center;">
+            <div class="estimate-card">
                 <h4>⏱️ Est. Training Time</h4>
-                <div style="font-size:1.3rem; font-weight:700; color:#818cf8;">{est_time}s</div>
+                <div class="estimate-value purple">{est_time}s</div>
             </div>
             """, unsafe_allow_html=True)
         with c2:
             st.markdown(f"""
-            <div class="analysis-panel" style="text-align:center;">
+            <div class="estimate-card">
                 <h4>💾 Est. Memory Usage</h4>
-                <div style="font-size:1.3rem; font-weight:700; color:#34d399;">{est_mem}MB</div>
+                <div class="estimate-value green">{est_mem}MB</div>
             </div>
             """, unsafe_allow_html=True)
         with c3:
-            st.markdown(f"""
-            <div class="analysis-panel" style="text-align:center;">
+            st.markdown("""
+            <div class="estimate-card">
                 <h4>🤖 Models to Train</h4>
-                <div style="font-size:1.3rem; font-weight:700; color:#fbbf24;">4 Agents</div>
+                <div class="estimate-value amber">4 Agents</div>
             </div>
             """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div class="custom-alert alert-info" style="margin-top:0.5rem;">
+        <div class="custom-alert alert-info" style="margin-top:0.75rem;">
             <span>💡</span>
             <div>
                 <strong>Cloud Deployment Tip:</strong> If using Streamlit Community Cloud
@@ -966,8 +1206,8 @@ if page == "System Setup & Training":
         </div>
         """, unsafe_allow_html=True)
 
-        training_successful = False
-        if st.button("🚀 Initialize & Train System", type="primary", use_container_width=True):
+        if st.button("🚀 Initialize & Train System", type="primary",
+                      use_container_width=True, key="train_synthetic"):
             progress_bar = st.progress(0)
             status_text = st.empty()
 
@@ -982,8 +1222,10 @@ if page == "System Setup & Training":
             ]
 
             try:
-                import threading, queue
-                result_queue = queue.Queue()
+                import threading
+                import queue as q_mod
+
+                result_queue = q_mod.Queue()
 
                 def train_in_background():
                     try:
@@ -995,11 +1237,10 @@ if page == "System Setup & Training":
                 thread = threading.Thread(target=train_in_background)
                 thread.start()
 
-                # Animate progress while training runs
                 for label, pct in steps:
                     status_text.markdown(f"""
                     <div class="custom-alert alert-info">
-                        <span class="pulse">⏳</span> <strong>{label}</strong>
+                        <span class="pulse-anim">⏳</span> <strong>{label}</strong>
                     </div>
                     """, unsafe_allow_html=True)
                     progress_bar.progress(pct)
@@ -1012,7 +1253,7 @@ if page == "System Setup & Training":
 
                 res_status, res_err = result_queue.get_nowait()
                 if res_status == "success":
-                    training_successful = True
+                    st.session_state.training_done = True
                     status_text.markdown("""
                     <div class="custom-alert alert-success">
                         <span>✅</span> <strong>All models trained and deployed successfully!</strong>
@@ -1025,9 +1266,11 @@ if page == "System Setup & Training":
             except Exception as e:
                 st.error(f"An error occurred during training: {str(e)}")
 
-        if training_successful:
-            time.sleep(1.5)
-            st.session_state.nav_page = "Dashboard Overview"
+        # Handle post-training navigation safely
+        if st.session_state.training_done:
+            st.session_state.training_done = False
+            time.sleep(1)
+            safe_navigate("Dashboard Overview")
             st.rerun()
 
     # --- TAB 2: CUSTOM DATA ---
@@ -1035,16 +1278,15 @@ if page == "System Setup & Training":
         st.markdown("""
         <div class="section-card">
             <h3>📁 Upload Your Agency Data</h3>
-            <p style="color:var(--text-secondary); font-size:0.88rem;">
-                Train the AI on your real debtor data for production-grade accuracy.
-                Supports CSV and Excel formats.
-            </p>
+            <p>Train the AI on your real debtor data for production-grade accuracy.
+            Supports CSV and Excel formats.</p>
         </div>
         """, unsafe_allow_html=True)
 
         with st.expander("📋 Data Format Requirements", expanded=False):
             st.markdown("""
             **Debtors File** must contain these columns:
+
             | Column | Type | Description |
             |--------|------|-------------|
             | `debtor_id` | string | Unique debt identifier |
@@ -1060,6 +1302,7 @@ if page == "System Setup & Training":
             | `will_pay_30_days` | int | Target variable (0 or 1) |
 
             **Communications File** must contain:
+
             | Column | Type | Description |
             |--------|------|-------------|
             | `comm_id` | string | Unique communication ID |
@@ -1072,29 +1315,25 @@ if page == "System Setup & Training":
         c1, c2 = st.columns(2)
         with c1:
             debtor_file = st.file_uploader(
-                "📊 Upload Debtors Data",
-                type=['csv', 'xlsx'],
-                help="CSV or Excel with debtor profiles"
+                "📊 Upload Debtors Data", type=['csv', 'xlsx'],
+                help="CSV or Excel file with debtor profiles"
             )
             if debtor_file:
                 st.markdown(f"""
-                <div class="custom-alert alert-success">
-                    <span>✅</span> <strong>{debtor_file.name}</strong> loaded
-                    ({debtor_file.size / 1024:.1f} KB)
+                <div class="file-loaded">
+                    ✅ <strong>{debtor_file.name}</strong> loaded ({debtor_file.size / 1024:.1f} KB)
                 </div>
                 """, unsafe_allow_html=True)
 
         with c2:
             comm_file = st.file_uploader(
-                "💬 Upload Communications Data",
-                type=['csv', 'xlsx'],
-                help="CSV or Excel with communication records"
+                "💬 Upload Communications Data", type=['csv', 'xlsx'],
+                help="CSV or Excel file with communication records"
             )
             if comm_file:
                 st.markdown(f"""
-                <div class="custom-alert alert-success">
-                    <span>✅</span> <strong>{comm_file.name}</strong> loaded
-                    ({comm_file.size / 1024:.1f} KB)
+                <div class="file-loaded">
+                    ✅ <strong>{comm_file.name}</strong> loaded ({comm_file.size / 1024:.1f} KB)
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -1106,7 +1345,7 @@ if page == "System Setup & Training":
                     load_func = pd.read_csv if debtor_file.name.endswith('.csv') else pd.read_excel
                     preview_df = load_func(debtor_file)
                     st.dataframe(preview_df.head(5), use_container_width=True)
-                    debtor_file.seek(0)  # reset pointer
+                    debtor_file.seek(0)
                     st.caption(f"Shape: {preview_df.shape[0]} rows × {preview_df.shape[1]} columns")
 
                 if comm_file:
@@ -1117,8 +1356,8 @@ if page == "System Setup & Training":
                     comm_file.seek(0)
                     st.caption(f"Shape: {preview_df.shape[0]} rows × {preview_df.shape[1]} columns")
 
-        training_successful_upload = False
-        if st.button("🚀 Train with Uploaded Data", type="primary", use_container_width=True):
+        if st.button("🚀 Train with Uploaded Data", type="primary",
+                      use_container_width=True, key="train_upload"):
             if debtor_file and comm_file:
                 with st.spinner("Processing files and training AI agents..."):
                     try:
@@ -1136,7 +1375,7 @@ if page == "System Setup & Training":
 
                         api.orchestrator.data_generator.generate_debtor_profiles = orig_gen_d
                         api.orchestrator.data_generator.generate_communication_data = orig_gen_c
-                        training_successful_upload = True
+                        st.session_state.upload_training_done = True
                     except Exception as e:
                         st.error(f"Error: {str(e)}")
                         st.markdown("""
@@ -1151,17 +1390,19 @@ if page == "System Setup & Training":
                 </div>
                 """, unsafe_allow_html=True)
 
-        if training_successful_upload:
+        if st.session_state.upload_training_done:
             st.markdown("""
             <div class="custom-alert alert-success">
-                <span>🎉</span> <strong>Models trained on your data!</strong> Redirecting to Dashboard...
+                <span>🎉</span> <strong>Models trained on your data!</strong> Redirecting...
             </div>
             """, unsafe_allow_html=True)
-            time.sleep(1.5)
-            st.session_state.nav_page = "Dashboard Overview"
+            st.session_state.upload_training_done = False
+            time.sleep(1)
+            safe_navigate("Dashboard Overview")
             st.rerun()
 
     render_footer()
+
 
 # =========================================================
 # PAGE: DASHBOARD OVERVIEW
@@ -1175,7 +1416,7 @@ elif page == "Dashboard Overview":
 
     df = api.orchestrator.debtor_data
 
-    # ── KPI Row ──
+    # ── KPI Row 1 ──
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         render_metric_card("👥", "Total Debtors", f"{len(df):,}",
@@ -1186,21 +1427,21 @@ elif page == "Dashboard Overview":
                            delta_positive=False, color_class="blue")
     with c3:
         render_metric_card("📊", "Avg Credit Score", f"{int(df['credit_score'].mean())}",
-                           delta=f"Range: {int(df['credit_score'].min())}-{int(df['credit_score'].max())}",
+                           delta=f"Range: {int(df['credit_score'].min())}–{int(df['credit_score'].max())}",
                            delta_positive=True, color_class="green")
     with c4:
         render_metric_card("📞", "Avg Response Rate", f"{df['response_rate'].mean():.1%}",
                            delta="Across all channels", delta_positive=True, color_class="amber")
 
-    st.markdown("<div style='height:1.5rem'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height:1.2rem'></div>", unsafe_allow_html=True)
 
-    # ── Secondary KPI Row ──
+    # ── KPI Row 2 ──
     c5, c6, c7, c8 = st.columns(4)
     with c5:
         high_risk = len(df[df['days_past_due'] > 90]) if 'days_past_due' in df.columns else 0
         render_metric_card("⚠️", "High Risk (>90 DPD)", f"{high_risk:,}",
-                           delta=f"{high_risk / len(df) * 100:.1f}% of portfolio",
-                           delta_positive=False, color_class="purple")
+                           delta=f"{high_risk / max(len(df), 1) * 100:.1f}% of portfolio",
+                           delta_positive=False, color_class="red")
     with c6:
         avg_dpd = int(df['days_past_due'].mean()) if 'days_past_due' in df.columns else 0
         render_metric_card("📅", "Avg Days Past Due", f"{avg_dpd}",
@@ -1208,7 +1449,7 @@ elif page == "Dashboard Overview":
     with c7:
         total_debt = df['total_debt'].sum() if 'total_debt' in df.columns else 0
         recovered = total_debt - df['remaining_balance'].sum()
-        recovery_rate = recovered / total_debt * 100 if total_debt > 0 else 0
+        recovery_rate = recovered / max(total_debt, 1) * 100
         render_metric_card("📈", "Recovery Rate", f"{recovery_rate:.1f}%",
                            delta=f"${recovered:,.0f} recovered", delta_positive=True,
                            color_class="green")
@@ -1223,54 +1464,46 @@ elif page == "Dashboard Overview":
     c_left, c_right = st.columns(2)
 
     with c_left:
-        st.markdown("""
-        <div class="section-card"><h3>📊 Debt Status Distribution</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>📊 Debt Status Distribution</h3></div>',
+                    unsafe_allow_html=True)
         status_counts = df['status'].value_counts().reset_index()
         status_counts.columns = ['Status', 'Count']
         status_counts['Status'] = status_counts['Status'].str.replace('_', ' ').str.title()
 
         fig1 = px.pie(
-            status_counts, names='Status', values='Count',
-            hole=0.45,
-            color_discrete_sequence=['#6366f1', '#8b5cf6', '#a78bfa', '#c4b5fd',
-                                     '#34d399', '#fbbf24', '#f87171']
+            status_counts, names='Status', values='Count', hole=0.45,
+            color_discrete_sequence=['#4f46e5', '#7c3aed', '#a78bfa', '#c4b5fd',
+                                     '#10b981', '#f59e0b', '#ef4444']
         )
         fig1.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e2e8f0'),
-            legend=dict(font=dict(size=11)),
-            margin=dict(l=20, r=20, t=20, b=20),
-            height=350
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#0f172a'),
+            legend=dict(font=dict(size=11, color='#334155')),
+            margin=dict(l=20, r=20, t=20, b=20), height=350
         )
-        fig1.update_traces(textinfo='percent+label', textfont_size=11)
+        fig1.update_traces(textinfo='percent+label', textfont_size=11,
+                           textfont_color='#0f172a')
         st.plotly_chart(fig1, use_container_width=True)
 
     with c_right:
-        st.markdown("""
-        <div class="section-card"><h3>🏷️ Debt Types Breakdown</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>🏷️ Debt Types Breakdown</h3></div>',
+                    unsafe_allow_html=True)
         if 'debt_type' in df.columns:
             type_counts = df['debt_type'].value_counts().reset_index()
             type_counts.columns = ['Debt Type', 'Count']
             type_counts['Debt Type'] = type_counts['Debt Type'].str.replace('_', ' ').str.title()
 
             fig2 = px.bar(
-                type_counts, x='Debt Type', y='Count',
-                color='Count',
-                color_continuous_scale=['#6366f1', '#8b5cf6', '#a78bfa']
+                type_counts, x='Debt Type', y='Count', color='Count',
+                color_continuous_scale=['#818cf8', '#4f46e5', '#3730a3']
             )
             fig2.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#e2e8f0'),
-                xaxis=dict(gridcolor='#2d2f3e'),
-                yaxis=dict(gridcolor='#2d2f3e'),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=350,
-                showlegend=False,
-                coloraxis_showscale=False
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#0f172a'),
+                xaxis=dict(gridcolor='#e2e8f0', title_font_color='#334155'),
+                yaxis=dict(gridcolor='#e2e8f0', title_font_color='#334155'),
+                margin=dict(l=20, r=20, t=20, b=20), height=350,
+                showlegend=False, coloraxis_showscale=False
             )
             st.plotly_chart(fig2, use_container_width=True)
 
@@ -1278,64 +1511,61 @@ elif page == "Dashboard Overview":
     c_left2, c_right2 = st.columns(2)
 
     with c_left2:
-        st.markdown("""
-        <div class="section-card"><h3>💳 Credit Score Distribution</h3></div>
-        """, unsafe_allow_html=True)
-        fig3 = px.histogram(
-            df, x='credit_score', nbins=30,
-            color_discrete_sequence=['#6366f1']
-        )
+        st.markdown('<div class="section-card"><h3>💳 Credit Score Distribution</h3></div>',
+                    unsafe_allow_html=True)
+        fig3 = px.histogram(df, x='credit_score', nbins=30,
+                            color_discrete_sequence=['#4f46e5'])
         fig3.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e2e8f0'),
-            xaxis=dict(title='Credit Score', gridcolor='#2d2f3e'),
-            yaxis=dict(title='Count', gridcolor='#2d2f3e'),
-            margin=dict(l=20, r=20, t=20, b=20),
-            height=300,
-            bargap=0.05
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#0f172a'),
+            xaxis=dict(title='Credit Score', gridcolor='#e2e8f0'),
+            yaxis=dict(title='Count', gridcolor='#e2e8f0'),
+            margin=dict(l=20, r=20, t=20, b=20), height=300, bargap=0.05
         )
         st.plotly_chart(fig3, use_container_width=True)
 
     with c_right2:
-        st.markdown("""
-        <div class="section-card"><h3>📅 Days Past Due vs Balance</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>📅 Days Past Due vs Balance</h3></div>',
+                    unsafe_allow_html=True)
+        sample_size = min(200, len(df))
         fig4 = px.scatter(
-            df.sample(min(200, len(df))),
-            x='days_past_due', y='remaining_balance',
-            color='credit_score',
-            size='remaining_balance',
-            color_continuous_scale='Viridis',
-            opacity=0.7
+            df.sample(sample_size), x='days_past_due', y='remaining_balance',
+            color='credit_score', size='remaining_balance',
+            color_continuous_scale='Viridis', opacity=0.7
         )
         fig4.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e2e8f0'),
-            xaxis=dict(title='Days Past Due', gridcolor='#2d2f3e'),
-            yaxis=dict(title='Remaining Balance ($)', gridcolor='#2d2f3e'),
-            margin=dict(l=20, r=20, t=20, b=20),
-            height=300
+            paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#0f172a'),
+            xaxis=dict(title='Days Past Due', gridcolor='#e2e8f0'),
+            yaxis=dict(title='Remaining Balance ($)', gridcolor='#e2e8f0'),
+            margin=dict(l=20, r=20, t=20, b=20), height=300
         )
         st.plotly_chart(fig4, use_container_width=True)
 
     # ── Top Debtors Table ──
-    st.markdown("""
-    <div class="section-card"><h3>🔝 Top 10 Highest Outstanding Balances</h3></div>
-    """, unsafe_allow_html=True)
+    st.markdown('<div class="section-card"><h3>🔝 Top 10 Highest Outstanding Balances</h3></div>',
+                unsafe_allow_html=True)
 
-    top_debtors = df.nlargest(10, 'remaining_balance')[
-        ['debtor_id', 'first_name', 'last_name', 'remaining_balance',
-         'days_past_due', 'credit_score', 'status']
-    ].copy()
+    display_cols = ['debtor_id', 'first_name', 'last_name', 'remaining_balance',
+                    'days_past_due', 'credit_score', 'status']
+    available_cols = [c for c in display_cols if c in df.columns]
+
+    top_debtors = df.nlargest(10, 'remaining_balance')[available_cols].copy()
     top_debtors['remaining_balance'] = top_debtors['remaining_balance'].apply(lambda x: f"${x:,.2f}")
-    top_debtors['status'] = top_debtors['status'].str.replace('_', ' ').str.title()
-    top_debtors.columns = ['ID', 'First Name', 'Last Name', 'Balance', 'DPD', 'Credit Score', 'Status']
+    if 'status' in top_debtors.columns:
+        top_debtors['status'] = top_debtors['status'].str.replace('_', ' ').str.title()
+
+    col_rename = {
+        'debtor_id': 'ID', 'first_name': 'First Name', 'last_name': 'Last Name',
+        'remaining_balance': 'Balance', 'days_past_due': 'DPD',
+        'credit_score': 'Credit Score', 'status': 'Status'
+    }
+    top_debtors = top_debtors.rename(columns=col_rename)
 
     st.dataframe(top_debtors, use_container_width=True, hide_index=True)
 
     render_footer()
+
 
 # =========================================================
 # PAGE: DEBTOR ANALYSIS PROFILER
@@ -1357,9 +1587,15 @@ elif page == "Debtor Analysis Profiler":
                                    help="Select or search for a debtor ID")
         debtor_row = df[df['debtor_id'] == selected_id].iloc[0]
 
-        first_name = debtor_row.get('first_name', 'Unknown')
-        last_name = debtor_row.get('last_name', '')
-        initials = f"{first_name[0]}{last_name[0]}" if last_name else first_name[0]
+        first_name = str(debtor_row.get('first_name', 'Unknown'))
+        last_name = str(debtor_row.get('last_name', ''))
+        initials = (first_name[0] if first_name else "?") + (last_name[0] if last_name else "")
+
+        status_str = str(debtor_row.get('status', '')).replace('_', ' ').title()
+        balance = debtor_row.get('remaining_balance', 0)
+        dpd = debtor_row.get('days_past_due', 0)
+        credit = debtor_row.get('credit_score', 'N/A')
+        resp_rate = debtor_row.get('response_rate', 0)
 
         st.markdown(f"""
         <div class="profile-card animate-in">
@@ -1367,30 +1603,29 @@ elif page == "Debtor Analysis Profiler":
             <div class="profile-name">{first_name} {last_name}</div>
             <div class="profile-id">ID: {selected_id}</div>
             <div style="margin-bottom:0.75rem;">
-                {render_badge(str(debtor_row.get('status', '')).replace('_', ' ').title(), 'purple')}
+                {render_badge(status_str, 'purple')}
             </div>
             <div class="profile-stats">
                 <div class="profile-stat">
                     <div class="profile-stat-label">Balance</div>
-                    <div class="profile-stat-value">${debtor_row.get('remaining_balance', 0):,.0f}</div>
+                    <div class="profile-stat-value">${balance:,.0f}</div>
                 </div>
                 <div class="profile-stat">
                     <div class="profile-stat-label">Days Past Due</div>
-                    <div class="profile-stat-value">{debtor_row.get('days_past_due', 0)}</div>
+                    <div class="profile-stat-value">{dpd}</div>
                 </div>
                 <div class="profile-stat">
                     <div class="profile-stat-label">Credit Score</div>
-                    <div class="profile-stat-value">{debtor_row.get('credit_score', 'N/A')}</div>
+                    <div class="profile-stat-value">{credit}</div>
                 </div>
                 <div class="profile-stat">
                     <div class="profile-stat-label">Response Rate</div>
-                    <div class="profile-stat-value">{debtor_row.get('response_rate', 0):.0%}</div>
+                    <div class="profile-stat-value">{resp_rate:.0%}</div>
                 </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # Additional debtor info
         with st.expander("📋 Full Profile Details"):
             for col_name in df.columns:
                 if col_name not in ('first_name', 'last_name', 'debtor_id'):
@@ -1404,11 +1639,12 @@ elif page == "Debtor Analysis Profiler":
         st.markdown("""
         <div class="section-card">
             <h3>💬 Simulate Incoming Communication</h3>
+            <p>Enter the debtor's recent message or call transcript for NLP analysis.</p>
         </div>
         """, unsafe_allow_html=True)
 
         custom_msg = st.text_area(
-            "Debtor's recent email/call transcript (optional)",
+            "Debtor message (optional)",
             placeholder="e.g., I lost my job and cannot afford payments right now. "
                         "Please give me some time to get back on my feet.",
             height=100,
@@ -1432,7 +1668,6 @@ elif page == "Debtor Analysis Profiler":
             if 'error' in analysis:
                 st.error(analysis['error'])
             else:
-                # Store in history
                 st.session_state.analysis_history.append({
                     'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                     'debtor_id': selected_id,
@@ -1440,24 +1675,27 @@ elif page == "Debtor Analysis Profiler":
                     'risk_level': analysis['agents_results']['risk_assessment']['risk_level']
                 })
 
-                # Priority Score Gauge
+                # Gauge row
                 st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
                 g1, g2, g3 = st.columns(3)
                 with g1:
-                    fig_gauge = create_gauge_chart(
-                        analysis['priority_score'],
-                        "Priority Score"
+                    st.plotly_chart(
+                        create_gauge_chart(analysis['priority_score'], "Priority Score"),
+                        use_container_width=True
                     )
-                    st.plotly_chart(fig_gauge, use_container_width=True)
                 with g2:
                     pay_prob = analysis['agents_results']['payment_prediction']['will_pay_probability'] * 100
-                    fig_gauge2 = create_gauge_chart(pay_prob, "Payment Probability")
-                    st.plotly_chart(fig_gauge2, use_container_width=True)
+                    st.plotly_chart(
+                        create_gauge_chart(pay_prob, "Payment Probability"),
+                        use_container_width=True
+                    )
                 with g3:
                     risk_level = analysis['agents_results']['risk_assessment']['risk_level']
                     risk_val = {'low': 25, 'medium': 55, 'high': 85}.get(risk_level.lower(), 50)
-                    fig_gauge3 = create_gauge_chart(risk_val, "Risk Level")
-                    st.plotly_chart(fig_gauge3, use_container_width=True)
+                    st.plotly_chart(
+                        create_gauge_chart(risk_val, "Risk Level"),
+                        use_container_width=True
+                    )
 
                 # Detailed tabs
                 t1, t2, t3, t4 = st.tabs([
@@ -1471,11 +1709,11 @@ elif page == "Debtor Analysis Profiler":
 
                     rc1, rc2 = st.columns(2)
                     with rc1:
-                        st.markdown("""
-                        <div class="analysis-panel"><h4>Risk Assessment</h4></div>
-                        """, unsafe_allow_html=True)
+                        st.markdown('<div class="analysis-panel"><h4>Risk Assessment</h4></div>',
+                                    unsafe_allow_html=True)
                         st.markdown(render_risk_indicator(risk['risk_level']),
                                     unsafe_allow_html=True)
+                        st.markdown("")
                         st.markdown(f"**Risk Score:** {risk.get('risk_score', 'N/A')}")
                         st.markdown(f"**Payment Probability:** {risk.get('payment_probability', 0):.1%}")
 
@@ -1485,25 +1723,21 @@ elif page == "Debtor Analysis Profiler":
                                 st.markdown(f"- {factor}")
 
                     with rc2:
-                        st.markdown("""
-                        <div class="analysis-panel"><h4>Payment Prediction</h4></div>
-                        """, unsafe_allow_html=True)
+                        st.markdown('<div class="analysis-panel"><h4>Payment Prediction</h4></div>',
+                                    unsafe_allow_html=True)
                         st.metric("Will Pay (30 days)", f"{pay['will_pay_probability']:.1%}")
-                        st.metric("Expected Recovery",
-                                  f"${pay.get('expected_value', 0):,.2f}")
+                        st.metric("Expected Recovery", f"${pay.get('expected_value', 0):,.2f}")
                         if 'confidence_interval' in pay:
                             ci = pay['confidence_interval']
-                            st.caption(f"95% CI: ${ci.get('low', 0):,.0f} – "
-                                       f"${ci.get('high', 0):,.0f}")
+                            st.caption(f"95% CI: ${ci.get('low', 0):,.0f} – ${ci.get('high', 0):,.0f}")
 
                 with t2:
                     strat = analysis['agents_results']['strategy']
                     sc1, sc2 = st.columns(2)
 
                     with sc1:
-                        st.markdown("""
-                        <div class="analysis-panel"><h4>Recommended Action</h4></div>
-                        """, unsafe_allow_html=True)
+                        st.markdown('<div class="analysis-panel"><h4>Recommended Action</h4></div>',
+                                    unsafe_allow_html=True)
                         recommended = strat['recommended_strategy'].replace('_', ' ').title()
                         st.markdown(f"""
                         <div class="risk-indicator risk-medium" style="margin-bottom:1rem;">
@@ -1513,40 +1747,34 @@ elif page == "Debtor Analysis Profiler":
 
                         st.markdown(f"**Primary Channel:** "
                                     f"{strat['recommended_channel']['primary'].title()}")
-                        if 'secondary' in strat['recommended_channel']:
+                        if 'secondary' in strat.get('recommended_channel', {}):
                             st.markdown(f"**Secondary Channel:** "
                                         f"{strat['recommended_channel']['secondary'].title()}")
-                        st.markdown(f"**Best Day:** "
-                                    f"{strat['recommended_timing']['best_day']}")
-                        st.markdown(f"**Best Time:** "
-                                    f"{strat['recommended_timing']['best_time']}")
+                        st.markdown(f"**Best Day:** {strat['recommended_timing']['best_day']}")
+                        st.markdown(f"**Best Time:** {strat['recommended_timing']['best_time']}")
 
                     with sc2:
-                        st.markdown("""
-                        <div class="analysis-panel"><h4>Strategy Rankings</h4></div>
-                        """, unsafe_allow_html=True)
-                        ranking_df = pd.DataFrame(strat['strategy_ranking'])
+                        st.markdown('<div class="analysis-panel"><h4>Strategy Rankings</h4></div>',
+                                    unsafe_allow_html=True)
+                        ranking_df = pd.DataFrame(strat.get('strategy_ranking', []))
                         if not ranking_df.empty:
+                            x_col = 'q_value' if 'q_value' in ranking_df.columns else ranking_df.columns[-1]
+                            y_col = 'strategy' if 'strategy' in ranking_df.columns else ranking_df.columns[0]
                             fig_strat = px.bar(
-                                ranking_df.head(5),
-                                x='q_value' if 'q_value' in ranking_df.columns else ranking_df.columns[1],
-                                y='strategy' if 'strategy' in ranking_df.columns else ranking_df.columns[0],
-                                orientation='h',
-                                color_discrete_sequence=['#6366f1']
+                                ranking_df.head(5), x=x_col, y=y_col,
+                                orientation='h', color_discrete_sequence=['#4f46e5']
                             )
                             fig_strat.update_layout(
-                                paper_bgcolor='rgba(0,0,0,0)',
-                                plot_bgcolor='rgba(0,0,0,0)',
-                                font=dict(color='#e2e8f0', size=11),
-                                xaxis=dict(gridcolor='#2d2f3e'),
-                                yaxis=dict(gridcolor='#2d2f3e'),
+                                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                                font=dict(color='#0f172a', size=11),
+                                xaxis=dict(gridcolor='#e2e8f0'),
+                                yaxis=dict(gridcolor='#e2e8f0'),
                                 margin=dict(l=10, r=10, t=10, b=10),
-                                height=250,
-                                showlegend=False
+                                height=250, showlegend=False
                             )
                             st.plotly_chart(fig_strat, use_container_width=True)
                         else:
-                            st.dataframe(ranking_df, use_container_width=True)
+                            st.info("No ranking data available.")
 
                 with t3:
                     if custom_msg:
@@ -1554,21 +1782,21 @@ elif page == "Debtor Analysis Profiler":
                         cc1, cc2 = st.columns(2)
 
                         with cc1:
-                            st.markdown("""
-                            <div class="analysis-panel"><h4>Sentiment Analysis</h4></div>
-                            """, unsafe_allow_html=True)
+                            st.markdown('<div class="analysis-panel"><h4>Sentiment Analysis</h4></div>',
+                                        unsafe_allow_html=True)
                             sentiment = comm.get('vader_category', 'N/A').title()
-                            sentiment_badge = 'success' if sentiment.lower() == 'positive' \
-                                else ('danger' if sentiment.lower() == 'negative' else 'warning')
+                            sentiment_badge = ('success' if sentiment.lower() == 'positive'
+                                               else 'danger' if sentiment.lower() == 'negative'
+                                               else 'warning')
                             st.markdown(render_badge(f"Sentiment: {sentiment}", sentiment_badge),
                                         unsafe_allow_html=True)
+                            st.markdown("")
 
                             intent = comm.get('intent', {})
                             intent_class = intent.get('classification', 'N/A').replace('_', ' ').title()
                             st.markdown(f"**Intent:** {intent_class}")
-                            st.markdown(f"**Confidence:** "
-                                        f"{intent.get('confidence', 0):.1%}"
-                                        if 'confidence' in intent else "")
+                            if 'confidence' in intent:
+                                st.markdown(f"**Confidence:** {intent.get('confidence', 0):.1%}")
 
                             flags = comm.get('compliance_flags', [])
                             if flags:
@@ -1581,24 +1809,27 @@ elif page == "Debtor Analysis Profiler":
                                     """, unsafe_allow_html=True)
 
                         with cc2:
-                            st.markdown("""
-                            <div class="analysis-panel"><h4>AI Generated Response</h4></div>
-                            """, unsafe_allow_html=True)
+                            st.markdown('<div class="analysis-panel"><h4>AI Generated Response</h4></div>',
+                                        unsafe_allow_html=True)
                             gen_resp = analysis['agents_results'].get(
-                                'generated_response', {}).get('response', '')
+                                'generated_response', {}).get('response', 'No response generated.')
                             st.text_area("Draft Response", gen_resp, height=200,
-                                         label_visibility="collapsed")
-
+                                         label_visibility="collapsed",
+                                         key="generated_response_text")
                             r1, r2 = st.columns(2)
                             with r1:
-                                st.button("📋 Copy", use_container_width=True)
+                                if st.button("📋 Copy to Clipboard", use_container_width=True,
+                                              key="copy_resp"):
+                                    st.toast("Response copied!", icon="📋")
                             with r2:
-                                st.button("✏️ Edit & Send", use_container_width=True)
+                                st.button("✏️ Edit & Send", use_container_width=True,
+                                           key="edit_resp")
                     else:
                         st.markdown("""
                         <div class="custom-alert alert-info">
-                            <span>💡</span> Enter a communication transcript above to
-                            activate NLP analysis and auto-response generation.
+                            <span>💡</span>
+                            <div>Enter a communication transcript above to activate NLP analysis
+                            and auto-response generation.</div>
                         </div>
                         """, unsafe_allow_html=True)
 
@@ -1606,32 +1837,32 @@ elif page == "Debtor Analysis Profiler":
                     comp = analysis['agents_results']['compliance']
                     if comp['is_approved']:
                         st.markdown(f"""
-                        <div class="custom-alert alert-success">
+                        <div class="custom-alert alert-success" style="padding:1.2rem;">
                             <span>✅</span>
                             <div><strong>Compliant</strong> — {comp['recommendation']}</div>
                         </div>
                         """, unsafe_allow_html=True)
                     else:
                         st.markdown(f"""
-                        <div class="custom-alert alert-danger">
+                        <div class="custom-alert alert-danger" style="padding:1.2rem;">
                             <span>❌</span>
                             <div><strong>Non-Compliant</strong> — {comp['recommendation']}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
                         for v in comp.get('violations', []):
-                            severity_badge = 'danger' if v.get('severity') == 'critical' else 'warning'
+                            sev = v.get('severity', 'warning')
+                            sev_badge = 'danger' if sev == 'critical' else 'warning'
                             st.markdown(f"""
                             <div class="violation-card">
                                 <div class="violation-rule">
-                                    {render_badge(v.get('severity', 'warning').upper(), severity_badge)}
-                                    {v['rule']}
+                                    {render_badge(sev.upper(), sev_badge)} {v['rule']}
                                 </div>
                                 <div class="violation-desc">{v['description']}</div>
                             </div>
                             """, unsafe_allow_html=True)
 
-                # Export analysis
+                # Export
                 st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
                 with st.expander("📥 Export Analysis Results"):
                     export_data = json.dumps(analysis, indent=2, default=str)
@@ -1644,6 +1875,7 @@ elif page == "Debtor Analysis Profiler":
                     )
 
     render_footer()
+
 
 # =========================================================
 # PAGE: BATCH PRIORITY ANALYSIS
@@ -1670,35 +1902,46 @@ elif page == "Batch Priority Analysis":
         run_batch = st.button("🚀 Run Batch Optimization", type="primary",
                               use_container_width=True)
     with c_btn2:
-        if st.session_state.batch_results:
-            st.button("🗑️ Clear Results", use_container_width=True,
-                       on_click=lambda: st.session_state.update(batch_results=None))
+        if st.session_state.batch_results is not None:
+            if st.button("🗑️ Clear Results", use_container_width=True):
+                st.session_state.batch_results = None
+                st.rerun()
 
     if run_batch:
         progress = st.progress(0)
-        status = st.empty()
+        status_text = st.empty()
 
-        with st.spinner(f"Analyzing {batch_size} debtors across all AI agents..."):
-            results = api.batch_analyze(n=batch_size)
+        status_text.markdown("""
+        <div class="custom-alert alert-info">
+            <span class="pulse-anim">⏳</span> <strong>Running batch analysis...</strong>
+        </div>
+        """, unsafe_allow_html=True)
 
-            clean_results = []
-            for i, r in enumerate(results):
-                progress.progress((i + 1) / len(results))
-                if 'error' not in r:
-                    clean_results.append({
-                        "Debtor ID": r['debtor_id'],
-                        "Priority Score": r['priority_score'],
-                        "Risk Level": r['agents_results']['risk_assessment']['risk_level'].upper(),
-                        "Strategy": r['agents_results']['strategy']['recommended_strategy']
-                            .replace('_', ' ').title(),
-                        "Payment Prob.": f"{r['agents_results']['risk_assessment']['payment_probability']:.1%}",
-                        "Payment Prob Num": r['agents_results']['risk_assessment']['payment_probability'],
-                        "Compliance": "✅ Pass" if r['agents_results']['compliance']['is_approved'] else "❌ Fail",
-                        "Channel": r['agents_results']['strategy']['recommended_channel']['primary'].title()
-                    })
+        results = api.batch_analyze(n=batch_size)
 
-            st.session_state.batch_results = clean_results
-            progress.progress(100)
+        clean_results = []
+        for i, r in enumerate(results):
+            progress.progress(min((i + 1) / max(len(results), 1), 1.0))
+            if 'error' not in r:
+                clean_results.append({
+                    "Debtor ID": r['debtor_id'],
+                    "Priority Score": r['priority_score'],
+                    "Risk Level": r['agents_results']['risk_assessment']['risk_level'].upper(),
+                    "Strategy": r['agents_results']['strategy']['recommended_strategy']
+                        .replace('_', ' ').title(),
+                    "Payment Prob.": f"{r['agents_results']['risk_assessment']['payment_probability']:.1%}",
+                    "Payment Prob Num": r['agents_results']['risk_assessment']['payment_probability'],
+                    "Compliance": "✅ Pass" if r['agents_results']['compliance']['is_approved'] else "❌ Fail",
+                    "Channel": r['agents_results']['strategy']['recommended_channel']['primary'].title()
+                })
+
+        st.session_state.batch_results = clean_results
+        progress.progress(100)
+        status_text.markdown("""
+        <div class="custom-alert alert-success">
+            <span>✅</span> <strong>Batch analysis complete!</strong>
+        </div>
+        """, unsafe_allow_html=True)
 
     if st.session_state.batch_results:
         results_df = pd.DataFrame(st.session_state.batch_results)
@@ -1706,110 +1949,102 @@ elif page == "Batch Priority Analysis":
         # Filter
         results_df = results_df[results_df['Risk Level'].isin(filter_risk)]
 
-        # Sort
-        if sort_by == "Priority Score":
-            results_df = results_df.sort_values('Priority Score', ascending=False)
-        elif sort_by == "Risk Level":
-            risk_order = {'HIGH': 0, 'MEDIUM': 1, 'LOW': 2}
-            results_df = results_df.sort_values('Risk Level',
-                                                key=lambda x: x.map(risk_order))
-        elif sort_by == "Payment Prob.":
-            results_df = results_df.sort_values('Payment Prob Num', ascending=True)
+        if results_df.empty:
+            st.info("No results match the selected filters.")
+        else:
+            # Sort
+            if sort_by == "Priority Score":
+                results_df = results_df.sort_values('Priority Score', ascending=False)
+            elif sort_by == "Risk Level":
+                risk_order = {'HIGH': 0, 'MEDIUM': 1, 'LOW': 2}
+                results_df = results_df.sort_values('Risk Level',
+                                                    key=lambda x: x.map(risk_order))
+            elif sort_by == "Payment Prob.":
+                results_df = results_df.sort_values('Payment Prob Num', ascending=True)
 
-        # Summary metrics
-        mc1, mc2, mc3, mc4 = st.columns(4)
-        with mc1:
-            render_metric_card("📊", "Analyzed", f"{len(results_df)}",
-                               color_class="purple")
-        with mc2:
-            high_count = len(results_df[results_df['Risk Level'] == 'HIGH'])
-            render_metric_card("🔴", "High Risk", f"{high_count}",
-                               delta=f"{high_count / len(results_df) * 100:.0f}%",
-                               delta_positive=False, color_class="blue")
-        with mc3:
-            pass_count = len(results_df[results_df['Compliance'] == '✅ Pass'])
-            render_metric_card("✅", "Compliant", f"{pass_count}",
-                               delta=f"{pass_count / len(results_df) * 100:.0f}%",
-                               delta_positive=True, color_class="green")
-        with mc4:
-            avg_priority = results_df['Priority Score'].mean()
-            render_metric_card("🎯", "Avg Priority", f"{avg_priority:.0f}",
-                               color_class="amber")
+            # Summary metrics
+            mc1, mc2, mc3, mc4 = st.columns(4)
+            total = len(results_df)
+            with mc1:
+                render_metric_card("📊", "Analyzed", f"{total}", color_class="purple")
+            with mc2:
+                high_count = len(results_df[results_df['Risk Level'] == 'HIGH'])
+                render_metric_card("🔴", "High Risk", f"{high_count}",
+                                   delta=f"{high_count / max(total, 1) * 100:.0f}%",
+                                   delta_positive=False, color_class="red")
+            with mc3:
+                pass_count = len(results_df[results_df['Compliance'] == '✅ Pass'])
+                render_metric_card("✅", "Compliant", f"{pass_count}",
+                                   delta=f"{pass_count / max(total, 1) * 100:.0f}%",
+                                   delta_positive=True, color_class="green")
+            with mc4:
+                avg_priority = results_df['Priority Score'].mean()
+                render_metric_card("🎯", "Avg Priority", f"{avg_priority:.0f}",
+                                   color_class="amber")
 
-        st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
+            st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
-        # Visualization
-        viz1, viz2 = st.columns(2)
-        with viz1:
-            st.markdown("""
-            <div class="section-card"><h3>📊 Priority Distribution</h3></div>
-            """, unsafe_allow_html=True)
-            fig_hist = px.histogram(
-                results_df, x='Priority Score', nbins=20,
-                color='Risk Level',
-                color_discrete_map={'HIGH': '#ef4444', 'MEDIUM': '#f59e0b', 'LOW': '#10b981'}
-            )
-            fig_hist.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#e2e8f0'),
-                xaxis=dict(gridcolor='#2d2f3e'),
-                yaxis=dict(gridcolor='#2d2f3e'),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=300, bargap=0.05
-            )
-            st.plotly_chart(fig_hist, use_container_width=True)
+            # Visualization
+            viz1, viz2 = st.columns(2)
+            with viz1:
+                st.markdown('<div class="section-card"><h3>📊 Priority Distribution</h3></div>',
+                            unsafe_allow_html=True)
+                fig_hist = px.histogram(
+                    results_df, x='Priority Score', nbins=20,
+                    color='Risk Level',
+                    color_discrete_map={'HIGH': '#ef4444', 'MEDIUM': '#f59e0b', 'LOW': '#10b981'}
+                )
+                fig_hist.update_layout(
+                    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(color='#0f172a'),
+                    xaxis=dict(gridcolor='#e2e8f0'),
+                    yaxis=dict(gridcolor='#e2e8f0'),
+                    margin=dict(l=20, r=20, t=20, b=20), height=300, bargap=0.05
+                )
+                st.plotly_chart(fig_hist, use_container_width=True)
 
-        with viz2:
-            st.markdown("""
-            <div class="section-card"><h3>🎯 Strategy Distribution</h3></div>
-            """, unsafe_allow_html=True)
-            strat_counts = results_df['Strategy'].value_counts().reset_index()
-            strat_counts.columns = ['Strategy', 'Count']
-            fig_strat = px.pie(
-                strat_counts, names='Strategy', values='Count', hole=0.4,
-                color_discrete_sequence=['#6366f1', '#8b5cf6', '#a78bfa',
-                                         '#34d399', '#fbbf24', '#f87171']
-            )
-            fig_strat.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#e2e8f0'),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=300
-            )
-            st.plotly_chart(fig_strat, use_container_width=True)
+            with viz2:
+                st.markdown('<div class="section-card"><h3>🎯 Strategy Distribution</h3></div>',
+                            unsafe_allow_html=True)
+                strat_counts = results_df['Strategy'].value_counts().reset_index()
+                strat_counts.columns = ['Strategy', 'Count']
+                fig_strat = px.pie(
+                    strat_counts, names='Strategy', values='Count', hole=0.4,
+                    color_discrete_sequence=['#4f46e5', '#7c3aed', '#a78bfa',
+                                             '#10b981', '#f59e0b', '#ef4444']
+                )
+                fig_strat.update_layout(
+                    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(color='#0f172a'),
+                    margin=dict(l=20, r=20, t=20, b=20), height=300
+                )
+                st.plotly_chart(fig_strat, use_container_width=True)
 
-        # Results table
-        st.markdown("""
-        <div class="section-card"><h3>📋 Prioritized Collection Queue</h3></div>
-        """, unsafe_allow_html=True)
+            # Results table
+            st.markdown('<div class="section-card"><h3>📋 Prioritized Collection Queue</h3></div>',
+                        unsafe_allow_html=True)
+            display_df = results_df.drop(columns=['Payment Prob Num'], errors='ignore')
+            st.dataframe(display_df, use_container_width=True, hide_index=True, height=400)
 
-        display_df = results_df.drop(columns=['Payment Prob Num'], errors='ignore')
-        st.dataframe(display_df, use_container_width=True, hide_index=True, height=400)
-
-        # Export
-        c_exp1, c_exp2 = st.columns(2)
-        with c_exp1:
-            csv_data = display_df.to_csv(index=False)
-            st.download_button(
-                "📥 Export as CSV",
-                data=csv_data,
-                file_name=f"batch_analysis_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
-                mime="text/csv",
-                use_container_width=True
-            )
-        with c_exp2:
-            json_data = display_df.to_json(orient='records', indent=2)
-            st.download_button(
-                "📥 Export as JSON",
-                data=json_data,
-                file_name=f"batch_analysis_{datetime.now().strftime('%Y%m%d_%H%M')}.json",
-                mime="application/json",
-                use_container_width=True
-            )
+            # Export buttons
+            c_exp1, c_exp2 = st.columns(2)
+            with c_exp1:
+                csv_data = display_df.to_csv(index=False)
+                st.download_button(
+                    "📥 Export as CSV", data=csv_data,
+                    file_name=f"batch_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+                    mime="text/csv", use_container_width=True
+                )
+            with c_exp2:
+                json_data = display_df.to_json(orient='records', indent=2)
+                st.download_button(
+                    "📥 Export as JSON", data=json_data,
+                    file_name=f"batch_{datetime.now().strftime('%Y%m%d_%H%M')}.json",
+                    mime="application/json", use_container_width=True
+                )
 
     render_footer()
+
 
 # =========================================================
 # PAGE: COMPLIANCE CHECKER
@@ -1825,12 +2060,9 @@ elif page == "Compliance Checker":
 
     with col_flags:
         st.markdown("""
-        <div class="section-card"><h3>🛡️ Debtor Protection Flags</h3></div>
-        """, unsafe_allow_html=True)
-
-        st.markdown("""
-        <div class="custom-alert alert-info" style="margin-bottom:1rem;">
-            <span>ℹ️</span> Select all applicable flags for the debtor.
+        <div class="section-card">
+            <h3>🛡️ Debtor Protection Flags</h3>
+            <p>Select all applicable regulatory flags for this debtor.</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1841,24 +2073,28 @@ elif page == "Compliance Checker":
         mil = st.toggle("🎖️ Active Military (SCRA)", value=False)
 
         st.markdown("---")
-
-        st.markdown("**Contact Frequency (Today/This Week):**")
+        st.markdown("**Contact Frequency:**")
         cf1, cf2 = st.columns(2)
         with cf1:
-            contacts_today = st.number_input("Today", 0, 10, 0)
+            contacts_today = st.number_input("Today", 0, 10, 0, key="ct_today")
         with cf2:
-            contacts_week = st.number_input("This Week", 0, 30, 0)
+            contacts_week = st.number_input("This Week", 0, 30, 0, key="ct_week")
 
     with col_action:
         st.markdown("""
-        <div class="section-card"><h3>📤 Proposed Collection Action</h3></div>
+        <div class="section-card">
+            <h3>📤 Proposed Collection Action</h3>
+            <p>Configure the action you want to test for compliance.</p>
+        </div>
         """, unsafe_allow_html=True)
 
         ac1, ac2 = st.columns(2)
         with ac1:
-            channel = st.selectbox("📱 Communication Channel",
-                                   ["phone", "email", "sms", "letter"],
-                                   format_func=lambda x: f"{'📞' if x == 'phone' else '📧' if x == 'email' else '📱' if x == 'sms' else '✉️'} {x.title()}")
+            channel_options = ["phone", "email", "sms", "letter"]
+            channel_labels = {"phone": "📞 Phone", "email": "📧 Email",
+                              "sms": "📱 SMS", "letter": "✉️ Letter"}
+            channel = st.selectbox("📱 Channel", channel_options,
+                                   format_func=lambda x: channel_labels[x])
         with ac2:
             contact_time = st.time_input("🕐 Time of Contact",
                                          value=datetime.now().replace(hour=10, minute=0))
@@ -1866,39 +2102,41 @@ elif page == "Compliance Checker":
         msg = st.text_area(
             "📝 Message Content",
             placeholder="Enter the proposed message to send to the debtor...",
-            height=150
+            height=150, key="compliance_msg"
         )
 
-        # Quick Templates
-        with st.expander("📋 Message Templates"):
-            templates = {
-                "Standard Reminder": "This is a reminder that your account has a balance of $X. "
-                                     "Please contact us to discuss payment options.",
+        # Quick templates
+        with st.expander("📋 Quick Message Templates"):
+            template_options = {
+                "Standard Reminder": "This is a reminder that your account has an outstanding balance. "
+                                     "Please contact us to discuss payment options at your convenience.",
                 "Payment Plan Offer": "We'd like to offer you a flexible payment plan to help "
-                                      "resolve your outstanding balance. Please call us at your convenience.",
+                                      "resolve your outstanding balance. Please call us to discuss options.",
                 "Final Notice": "This is a final notice regarding your outstanding debt. "
                                 "Please contact our office within 30 days to resolve this matter.",
                 "Aggressive (Test)": "Pay your debt now or we will seize your property and garnish your wages!"
             }
-            selected_template = st.selectbox("Choose Template", list(templates.keys()))
-            if st.button("📋 Use This Template"):
-                msg = templates[selected_template]
-                st.rerun()
+            selected_template = st.selectbox("Choose a template", list(template_options.keys()),
+                                             key="template_select")
+            st.code(template_options[selected_template], language=None)
+            st.caption("Copy the text above into the Message Content field to test it.")
 
     st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
-    if st.button("🔍 Run Compliance Check", type="primary", use_container_width=True):
-        if not msg:
+    if st.button("🔍 Run Compliance Check", type="primary", use_container_width=True,
+                  key="run_compliance"):
+        if not msg.strip():
             st.markdown("""
             <div class="custom-alert alert-warning">
-                <span>⚠️</span> Please enter a message to check compliance.
+                <span>⚠️</span> <div>Please enter a message to check compliance.</div>
             </div>
             """, unsafe_allow_html=True)
         else:
             debtor_context = {
                 'do_not_call': dnc, 'cease_and_desist': cnd,
                 'represented_by_attorney': att, 'bankruptcy_filed': bnk,
-                'active_military': mil, 'contacts_today': contacts_today,
+                'active_military': mil,
+                'contacts_today': contacts_today,
                 'contacts_this_week': contacts_week
             }
             action_context = {
@@ -1913,34 +2151,33 @@ elif page == "Compliance Checker":
             st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
             if result['compliance_status'] == 'compliant':
-                st.markdown(f"""
+                st.markdown("""
                 <div class="custom-alert alert-success" style="padding:1.5rem;">
                     <span style="font-size:2rem;">✅</span>
                     <div>
                         <strong style="font-size:1.1rem;">Fully Compliant</strong><br>
-                        <span style="font-size:0.9rem;">This action meets all FDCPA, TCPA,
-                        and SCRA requirements. Safe to proceed.</span>
+                        This action meets all FDCPA, TCPA, and SCRA requirements. Safe to proceed.
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
 
-                st.markdown("""
-                <div class="section-card">
-                    <h3>✅ Compliance Summary</h3>
-                </div>
-                """, unsafe_allow_html=True)
+                st.markdown('<div class="section-card"><h3>✅ Compliance Summary</h3></div>',
+                            unsafe_allow_html=True)
 
                 checks = [
-                    ("FDCPA Time Restrictions", "Compliant", "success"),
-                    ("Do Not Call Compliance", "Compliant" if not dnc else "N/A", "success"),
-                    ("Cease & Desist Compliance", "Compliant" if not cnd else "N/A", "success"),
-                    ("Bankruptcy Stay", "Compliant" if not bnk else "N/A", "success"),
-                    ("SCRA Protections", "Compliant" if not mil else "N/A", "success"),
-                    ("Language & Tone", "Compliant", "success"),
+                    ("FDCPA Time Restrictions", "Pass"),
+                    ("Do Not Call Compliance", "N/A" if dnc else "Pass"),
+                    ("Cease & Desist Compliance", "N/A" if cnd else "Pass"),
+                    ("Bankruptcy Stay", "N/A" if bnk else "Pass"),
+                    ("SCRA Protections", "N/A" if mil else "Pass"),
+                    ("Language & Tone", "Pass"),
                 ]
-                for check_name, check_status, badge_type in checks:
-                    st.markdown(f"- {render_badge(check_status, badge_type)} **{check_name}**",
-                                unsafe_allow_html=True)
+                for check_name, check_status in checks:
+                    badge_type = "success" if check_status == "Pass" else "info"
+                    st.markdown(
+                        f"&nbsp;&nbsp;{render_badge(check_status, badge_type)} &nbsp; **{check_name}**",
+                        unsafe_allow_html=True
+                    )
 
             else:
                 st.markdown(f"""
@@ -1948,40 +2185,38 @@ elif page == "Compliance Checker":
                     <span style="font-size:2rem;">❌</span>
                     <div>
                         <strong style="font-size:1.1rem;">Non-Compliant — 
-                        {result['compliance_status'].upper()}</strong><br>
-                        <span style="font-size:0.9rem;">{result.get('recommendation', '')}</span>
+                        {result['compliance_status'].replace('_', ' ').upper()}</strong><br>
+                        {result.get('recommendation', 'Review and correct the proposed action.')}
                     </div>
                 </div>
                 """, unsafe_allow_html=True)
 
-                if 'violations' in result:
-                    st.markdown("""
-                    <div class="section-card"><h3>🚨 Violations Detected</h3></div>
-                    """, unsafe_allow_html=True)
+                if 'violations' in result and result['violations']:
+                    st.markdown('<div class="section-card"><h3>🚨 Violations Detected</h3></div>',
+                                unsafe_allow_html=True)
                     for v in result['violations']:
+                        sev = v.get('severity', 'warning')
+                        sev_badge = 'danger' if sev == 'critical' else 'warning'
                         st.markdown(f"""
                         <div class="violation-card">
                             <div class="violation-rule">
-                                {render_badge(v.get('severity', 'warning').upper(),
-                                              'danger' if v.get('severity') == 'critical' else 'warning')}
-                                &nbsp; {v['rule']}
+                                {render_badge(sev.upper(), sev_badge)} &nbsp; {v['rule']}
                             </div>
                             <div class="violation-desc">{v['description']}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
-                if 'warnings' in result:
-                    st.markdown("""
-                    <div class="section-card"><h3>⚠️ Warnings</h3></div>
-                    """, unsafe_allow_html=True)
+                if 'warnings' in result and result['warnings']:
+                    st.markdown('<div class="section-card"><h3>⚠️ Warnings</h3></div>',
+                                unsafe_allow_html=True)
                     for w in result['warnings']:
                         st.markdown(f"""
                         <div class="warning-card">
-                            <div style="color:#fcd34d; font-weight:600;">⚠️ {w}</div>
+                            <div style="font-weight:600;">⚠️ {w}</div>
                         </div>
                         """, unsafe_allow_html=True)
 
-            # Export compliance result
+            # Export
             with st.expander("📥 Export Compliance Report"):
                 report = {
                     'timestamp': datetime.now().isoformat(),
@@ -1992,15 +2227,16 @@ elif page == "Compliance Checker":
                 st.download_button(
                     "⬇️ Download Report (JSON)",
                     data=json.dumps(report, indent=2, default=str),
-                    file_name=f"compliance_report_{datetime.now().strftime('%Y%m%d_%H%M')}.json",
+                    file_name=f"compliance_{datetime.now().strftime('%Y%m%d_%H%M')}.json",
                     mime="application/json",
                     use_container_width=True
                 )
 
     render_footer()
 
+
 # =========================================================
-# PAGE: ANALYTICS & REPORTS (NEW)
+# PAGE: ANALYTICS & REPORTS
 # =========================================================
 elif page == "Analytics & Reports":
     render_page_header(
@@ -2011,11 +2247,6 @@ elif page == "Analytics & Reports":
 
     df = api.orchestrator.debtor_data
 
-    # Portfolio Overview
-    st.markdown("""
-    <div class="section-card"><h3>📊 Portfolio Analytics</h3></div>
-    """, unsafe_allow_html=True)
-
     tab_a1, tab_a2, tab_a3 = st.tabs([
         "📊 Distribution Analysis", "📈 Correlation Analysis", "📋 Segment Analysis"
     ])
@@ -2024,129 +2255,123 @@ elif page == "Analytics & Reports":
         a1, a2 = st.columns(2)
 
         with a1:
-            st.markdown("**Balance Distribution by Status**")
+            st.markdown('<div class="section-card"><h3>📦 Balance by Status</h3></div>',
+                        unsafe_allow_html=True)
             fig_box = px.box(
-                df, x='status', y='remaining_balance',
-                color='status',
-                color_discrete_sequence=['#6366f1', '#8b5cf6', '#a78bfa',
-                                         '#34d399', '#fbbf24']
+                df, x='status', y='remaining_balance', color='status',
+                color_discrete_sequence=['#4f46e5', '#7c3aed', '#a78bfa', '#10b981', '#f59e0b']
             )
             fig_box.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#e2e8f0'),
-                xaxis=dict(gridcolor='#2d2f3e', title='Status'),
-                yaxis=dict(gridcolor='#2d2f3e', title='Remaining Balance ($)'),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=350, showlegend=False
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#0f172a'),
+                xaxis=dict(gridcolor='#e2e8f0', title='Status'),
+                yaxis=dict(gridcolor='#e2e8f0', title='Remaining Balance ($)'),
+                margin=dict(l=20, r=20, t=20, b=20), height=350, showlegend=False
             )
             fig_box.update_xaxes(tickangle=45)
             st.plotly_chart(fig_box, use_container_width=True)
 
         with a2:
-            st.markdown("**Income vs Remaining Balance**")
+            st.markdown('<div class="section-card"><h3>💰 Income vs Balance</h3></div>',
+                        unsafe_allow_html=True)
             if 'income_estimate' in df.columns:
+                sample_size = min(300, len(df))
                 fig_scatter = px.scatter(
-                    df.sample(min(300, len(df))),
+                    df.sample(sample_size),
                     x='income_estimate', y='remaining_balance',
-                    color='status', size='days_past_due',
-                    opacity=0.6,
-                    color_discrete_sequence=['#6366f1', '#34d399', '#f59e0b',
-                                             '#ef4444', '#8b5cf6']
+                    color='status', size='days_past_due', opacity=0.6,
+                    color_discrete_sequence=['#4f46e5', '#10b981', '#f59e0b',
+                                             '#ef4444', '#7c3aed']
                 )
                 fig_scatter.update_layout(
-                    paper_bgcolor='rgba(0,0,0,0)',
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    font=dict(color='#e2e8f0'),
-                    xaxis=dict(gridcolor='#2d2f3e', title='Income Estimate ($)'),
-                    yaxis=dict(gridcolor='#2d2f3e', title='Remaining Balance ($)'),
-                    margin=dict(l=20, r=20, t=20, b=20),
-                    height=350
+                    paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                    font=dict(color='#0f172a'),
+                    xaxis=dict(title='Income Estimate ($)', gridcolor='#e2e8f0'),
+                    yaxis=dict(title='Remaining Balance ($)', gridcolor='#e2e8f0'),
+                    margin=dict(l=20, r=20, t=20, b=20), height=350
                 )
                 st.plotly_chart(fig_scatter, use_container_width=True)
+            else:
+                st.info("Income estimate column not found in dataset.")
 
     with tab_a2:
-        st.markdown("**Feature Correlation Heatmap**")
+        st.markdown('<div class="section-card"><h3>🔗 Feature Correlation Heatmap</h3></div>',
+                    unsafe_allow_html=True)
         numeric_cols = df.select_dtypes(include='number').columns.tolist()
         display_cols = [c for c in numeric_cols
                         if c in ('remaining_balance', 'total_debt', 'days_past_due',
                                  'credit_score', 'income_estimate', 'response_rate',
                                  'will_pay_30_days')]
-        if display_cols:
+        if len(display_cols) >= 2:
             corr = df[display_cols].corr()
             fig_corr = px.imshow(
-                corr,
-                text_auto='.2f',
-                color_continuous_scale='RdBu_r',
-                aspect='auto'
+                corr, text_auto='.2f', color_continuous_scale='RdBu_r', aspect='auto'
             )
             fig_corr.update_layout(
-                paper_bgcolor='rgba(0,0,0,0)',
-                plot_bgcolor='rgba(0,0,0,0)',
-                font=dict(color='#e2e8f0', size=11),
-                margin=dict(l=20, r=20, t=20, b=20),
-                height=450
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#0f172a', size=11),
+                margin=dict(l=20, r=20, t=20, b=20), height=450
             )
             st.plotly_chart(fig_corr, use_container_width=True)
+        else:
+            st.info("Not enough numeric columns for correlation analysis.")
 
     with tab_a3:
-        st.markdown("**Debtor Segmentation by Risk Tier**")
+        st.markdown('<div class="section-card"><h3>📊 Debtor Segmentation by Risk Tier</h3></div>',
+                    unsafe_allow_html=True)
 
-        # Create risk tiers
         df_seg = df.copy()
-        df_seg['risk_tier'] = pd.cut(
-            df_seg['days_past_due'],
-            bins=[0, 30, 60, 90, 180, float('inf')],
-            labels=['Current (0-30)', 'Early (31-60)',
-                    'Mid (61-90)', 'Late (91-180)', 'Severe (180+)']
-        )
+        if 'days_past_due' in df_seg.columns:
+            max_dpd = df_seg['days_past_due'].max()
+            bins = [0, 30, 60, 90, 180, max(max_dpd + 1, 181)]
+            labels = ['Current (0-30)', 'Early (31-60)', 'Mid (61-90)',
+                      'Late (91-180)', 'Severe (180+)']
+            df_seg['risk_tier'] = pd.cut(df_seg['days_past_due'], bins=bins, labels=labels,
+                                         include_lowest=True)
 
-        seg_summary = df_seg.groupby('risk_tier', observed=True).agg({
-            'debtor_id': 'count',
-            'remaining_balance': ['sum', 'mean'],
-            'credit_score': 'mean',
-            'response_rate': 'mean'
-        }).round(2)
+            seg_summary = df_seg.groupby('risk_tier', observed=True).agg({
+                'debtor_id': 'count',
+                'remaining_balance': ['sum', 'mean'],
+                'credit_score': 'mean',
+                'response_rate': 'mean'
+            }).round(2)
+            seg_summary.columns = ['Count', 'Total Balance', 'Avg Balance',
+                                   'Avg Credit Score', 'Avg Response Rate']
+            seg_summary = seg_summary.reset_index()
 
-        seg_summary.columns = ['Count', 'Total Balance', 'Avg Balance',
-                               'Avg Credit Score', 'Avg Response Rate']
-        seg_summary = seg_summary.reset_index()
+            st.dataframe(seg_summary, use_container_width=True, hide_index=True)
 
-        # Display
-        st.dataframe(seg_summary, use_container_width=True, hide_index=True)
-
-        # Segment visualization
-        fig_seg = px.bar(
-            seg_summary, x='risk_tier', y='Total Balance',
-            color='Count',
-            color_continuous_scale=['#10b981', '#f59e0b', '#ef4444'],
-            text='Count'
-        )
-        fig_seg.update_layout(
-            paper_bgcolor='rgba(0,0,0,0)',
-            plot_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#e2e8f0'),
-            xaxis=dict(title='Risk Tier', gridcolor='#2d2f3e'),
-            yaxis=dict(title='Total Balance ($)', gridcolor='#2d2f3e'),
-            margin=dict(l=20, r=20, t=20, b=20),
-            height=350,
-            coloraxis_showscale=False
-        )
-        fig_seg.update_traces(textposition='outside')
-        st.plotly_chart(fig_seg, use_container_width=True)
+            fig_seg = px.bar(
+                seg_summary, x='risk_tier', y='Total Balance',
+                color='Count',
+                color_continuous_scale=['#10b981', '#f59e0b', '#ef4444'],
+                text='Count'
+            )
+            fig_seg.update_layout(
+                paper_bgcolor='rgba(0,0,0,0)', plot_bgcolor='rgba(0,0,0,0)',
+                font=dict(color='#0f172a'),
+                xaxis=dict(title='Risk Tier', gridcolor='#e2e8f0'),
+                yaxis=dict(title='Total Balance ($)', gridcolor='#e2e8f0'),
+                margin=dict(l=20, r=20, t=20, b=20), height=350,
+                coloraxis_showscale=False
+            )
+            fig_seg.update_traces(textposition='outside')
+            st.plotly_chart(fig_seg, use_container_width=True)
+        else:
+            st.info("Days past due column not found for segmentation.")
 
     # Analysis History
     if st.session_state.analysis_history:
-        st.markdown("""
-        <div class="section-card"><h3>📜 Recent Analysis History</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>📜 Recent Analysis History</h3></div>',
+                    unsafe_allow_html=True)
         history_df = pd.DataFrame(st.session_state.analysis_history)
         st.dataframe(history_df, use_container_width=True, hide_index=True)
 
     render_footer()
 
+
 # =========================================================
-# PAGE: SETTINGS (NEW)
+# PAGE: SETTINGS
 # =========================================================
 elif page == "Settings":
     render_page_header(
@@ -2154,69 +2379,75 @@ elif page == "Settings":
         "Customize application behavior, manage data, and configure system preferences."
     )
 
-    tab_s1, tab_s2, tab_s3 = st.tabs([
-        "⚙️ General Settings", "🗃️ Data Management", "ℹ️ About"
-    ])
+    tab_s1, tab_s2, tab_s3 = st.tabs(["⚙️ General", "🗃️ Data Management", "ℹ️ About"])
 
     with tab_s1:
-        st.markdown("""
-        <div class="section-card"><h3>⚙️ Display Preferences</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>⚙️ Display Preferences</h3></div>',
+                    unsafe_allow_html=True)
 
         st.session_state.export_format = st.selectbox(
             "Default Export Format", ['csv', 'json', 'xlsx'],
-            index=['csv', 'json', 'xlsx'].index(st.session_state.export_format)
+            index=['csv', 'json', 'xlsx'].index(st.session_state.get('export_format', 'csv')),
+            key="settings_export_format"
         )
 
-        st.markdown("""
-        <div class="section-card"><h3>🔔 Notification Preferences</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>🔔 Notifications</h3></div>',
+                    unsafe_allow_html=True)
 
-        st.toggle("Enable high-risk alerts", value=True)
-        st.toggle("Enable compliance warnings", value=True)
-        st.toggle("Enable training completion notifications", value=True)
+        st.toggle("Enable high-risk alerts", value=True, key="pref_risk_alerts")
+        st.toggle("Enable compliance warnings", value=True, key="pref_comp_warnings")
+        st.toggle("Enable training notifications", value=True, key="pref_train_notif")
 
     with tab_s2:
-        st.markdown("""
-        <div class="section-card"><h3>🗃️ Data Management</h3></div>
-        """, unsafe_allow_html=True)
+        st.markdown('<div class="section-card"><h3>🗃️ Data Management</h3></div>',
+                    unsafe_allow_html=True)
 
         if api.initialized:
             df = api.orchestrator.debtor_data
+            mem_usage = df.memory_usage(deep=True).sum() / 1024 / 1024
+
             st.markdown(f"""
             <div class="custom-alert alert-info">
                 <span>ℹ️</span>
                 <div>
-                    <strong>Current Dataset:</strong>
-                    {len(df):,} debtors loaded<br>
-                    <strong>Memory Usage:</strong> ~{df.memory_usage(deep=True).sum() / 1024 / 1024:.1f} MB
+                    <strong>Current Dataset:</strong> {len(df):,} debtors loaded<br>
+                    <strong>Memory Usage:</strong> ~{mem_usage:.1f} MB<br>
+                    <strong>Columns:</strong> {len(df.columns)}
                 </div>
             </div>
             """, unsafe_allow_html=True)
 
-            if st.button("🗑️ Clear All Data & Reset System", type="primary"):
+            st.markdown("---")
+            st.markdown("**Export Full Dataset:**")
+
+            c1, c2 = st.columns(2)
+            with c1:
+                csv = df.to_csv(index=False)
+                st.download_button(
+                    "📥 Download CSV", csv,
+                    f"full_data_{datetime.now().strftime('%Y%m%d')}.csv",
+                    "text/csv", use_container_width=True
+                )
+            with c2:
+                json_data = df.to_json(orient='records', indent=2)
+                st.download_button(
+                    "📥 Download JSON", json_data,
+                    f"full_data_{datetime.now().strftime('%Y%m%d')}.json",
+                    "application/json", use_container_width=True
+                )
+
+            st.markdown("---")
+            st.markdown("**⚠️ Danger Zone:**")
+            if st.button("🗑️ Clear All Data & Reset System", type="primary",
+                          key="reset_system"):
                 st.cache_resource.clear()
                 st.session_state.analysis_history = []
                 st.session_state.batch_results = None
                 st.rerun()
-
-            st.markdown("---")
-            st.markdown("**Export Full Dataset:**")
-            c1, c2 = st.columns(2)
-            with c1:
-                csv = df.to_csv(index=False)
-                st.download_button("📥 Download CSV", csv,
-                                   f"full_data_{datetime.now().strftime('%Y%m%d')}.csv",
-                                   "text/csv", use_container_width=True)
-            with c2:
-                json_data = df.to_json(orient='records', indent=2)
-                st.download_button("📥 Download JSON", json_data,
-                                   f"full_data_{datetime.now().strftime('%Y%m%d')}.json",
-                                   "application/json", use_container_width=True)
         else:
             st.markdown("""
             <div class="custom-alert alert-warning">
-                <span>⚠️</span> No data loaded. Train the system first.
+                <span>⚠️</span> <div>No data loaded. Train the system first.</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -2225,13 +2456,14 @@ elif page == "Settings":
         <div class="section-card" style="text-align:center;">
             <div style="font-size:3rem; margin-bottom:1rem;">🤖</div>
             <h3 style="justify-content:center;">AI Debt Collection Agents v2.0</h3>
-            <p style="color:var(--text-secondary); max-width:500px; margin:0 auto;">
-                A multi-agent AI platform for intelligent debt collection management.
-                Featuring risk assessment, NLP communication analysis, payment prediction,
-                reinforcement learning strategy optimization, and regulatory compliance checking.
-            </p>
         </div>
         """, unsafe_allow_html=True)
+
+        st.markdown("""
+        A multi-agent AI platform for intelligent debt collection management.
+        Featuring risk assessment, NLP communication analysis, payment prediction,
+        reinforcement learning strategy optimization, and regulatory compliance checking.
+        """)
 
         st.markdown("<div style='height:1rem'></div>", unsafe_allow_html=True)
 
@@ -2252,8 +2484,7 @@ elif page == "Settings":
                     <div style="display:flex; align-items:center; gap:0.75rem;">
                         <span style="font-size:1.5rem;">{icon}</span>
                         <div>
-                            <div style="font-weight:700; color:var(--text-primary);
-                                        font-size:0.9rem;">{name}</div>
+                            <div style="font-weight:700; font-size:0.9rem;">{name}</div>
                             <div style="font-size:0.78rem; color:var(--text-secondary);">{desc}</div>
                         </div>
                     </div>
