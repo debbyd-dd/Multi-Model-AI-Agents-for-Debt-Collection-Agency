@@ -121,7 +121,7 @@ st.markdown("""
     }
 
     .page-header p {
-        color: var(--text-secondary);
+        color: var(--text-primary);
         font-size: 0.95rem;
         margin: 0;
         line-height: 1.6;
